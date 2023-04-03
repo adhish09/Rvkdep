@@ -39,6 +39,7 @@ import EditProfile from "./routes/EditProfile/EditProfile";
 import Openimage from "./routes/Openimage/Openimage";
 import ErrorPage from "./routes/ErrorPage";
 
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthContextProvider } from "./contexts/AuthContext";
 
 const AppLayout = () => {
@@ -122,8 +123,8 @@ const router = createBrowserRouter([
         element: <EventsAll />,
       },
       {
-        path: "bookevent",
-        element: <BookEvent />,
+        path: "event/:id/details",
+        element:<ProtectedRoute><BookEvent /></ProtectedRoute> ,
       },
       {
         path: "newsblog",

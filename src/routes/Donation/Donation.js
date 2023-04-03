@@ -7,6 +7,7 @@ import { MdArrowForward } from "react-icons/md";
 import { CgMailForward } from "react-icons/cg";
 import { FiUnlock } from "react-icons/fi";
 import { IoReturnUpForwardOutline } from "react-icons/io5";
+import axios  from "axios";
 
 const Donation = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
@@ -53,6 +54,20 @@ const Donation = () => {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
+
+
+  function handleSubmit(event) {
+    // Submit form data to server
+     axios.post('/api/donations/', {amount:inputValue})
+    .then((response) => {
+      alert("You have successfully Donated")
+    })
+    .catch((error) => {
+     alert(error)
+    });
+  }
+
   return (
     <div className="newss313">
       <div className="card-container_out91131">
@@ -118,7 +133,7 @@ const Donation = () => {
                   type="number"
                   value={inputValue}
                   onChange={handleInputChange}
-                  onChange={(e) => setInputValue(e.target.value)}
+
                   placeholder="Type your own amount"
                 />
               </div>
@@ -127,7 +142,7 @@ const Donation = () => {
 
                 <div className="submitamt">
                   {inputValue ? (
-                    <button className="submitamt" type="submit">
+                    <button className="submitamt" type="submit" onClick={handleSubmit}>
                       <NavLink to="/detail" className="submitamt">Donate Now</NavLink>
                     </button>
                   ) : (

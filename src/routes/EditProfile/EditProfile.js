@@ -1,65 +1,87 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, {useContext, useEffect,  useState} from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
-import { BsShare } from "react-icons/bs";
-import { MdArrowForward } from "react-icons/md";
-import { CgMailForward } from "react-icons/cg";
-import { FiUnlock } from "react-icons/fi";
-import { IoReturnUpForwardOutline } from "react-icons/io5";
-import { useForm } from "react-hook-form";
+import { AuthContext } from "../../contexts/AuthContext";
+import axios from '../../services/apiService';
+
 
 const EditProfile = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const [active_user, setActiveUser] = useState({})
 
-  const [selectedOption, setSelectedOption] = useState("");
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const [state, setState] = useState({});
+
+  const handleChange = (event) => {
+    setState((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
   };
-  const [gender, setGender] = useState("");
 
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
-  };
-  function handleSubmit(event) {
-    event.preventDefault();
-    // Submit form data to server
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get('/api/accounts/'+user.id+"/");
+        setActiveUser(response.data);
+
+        const initialState = {
+          name:response.data.name,
+          age:response.data.age,
+          dob:response.data.dob,
+          email:response.data.email,
+          phone_number:response.data.phone_number,
+          address:response.data.address,
+          gender:response.data.gender
+        }
+    
+        setState(initialState);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUser();
+
+  }, []);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   }
 
-  const [isCheckedYes, setIsCheckedYes] = useState(false);
-  const [isCheckedNo, setIsCheckedNo] = useState(false);
 
-  const handleCheckboxYesChange = (event) => {
-    setIsCheckedYes(event.target.checked);
-    setIsCheckedNo(false);
-  };
+  function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData()
 
-  const handleCheckboxNoChange = (event) => {
-    setIsCheckedNo(event.target.checked);
-    setIsCheckedYes(false);
-  };
+    data.append("name", state.name)
+    data.append("age", state.age)
+    data.append("dob", state.dob)
+    data.append("email", state.email)
+    data.append("phone_number", state.phone_number)
+    data.append("address", state.address)
+    data.append("gender", state.gender)
 
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-  };
-  const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-
-  const handleCheckbox1Change = (event) => {
-    if (isChecked2) {
-      setIsChecked2(false);
+    if (selectedFile){
+      data.append("profile_picture", selectedFile)
     }
-    setIsChecked1(event.target.checked);
-  };
+ 
 
-  const handleCheckbox2Change = (event) => {
-    if (isChecked1) {
-      setIsChecked1(false);
-    }
-    setIsChecked2(event.target.checked);
-  };
+    // Submit form data to server
+     axios.patch('/api/accounts/'+user.id+"/", data)
+    .then((response) => {
+      alert("You have successfully updated your account")
+    })
+    .catch((error) => {
+     alert(error)
+    });
+  }
+
 
   return (
     <div className="newss313">
@@ -80,6 +102,9 @@ const EditProfile = () => {
                     <div>
                       <input
                         type="text"
+                        name="name"
+                        value={state.name}
+                        onChange={handleChange}
                         className="datainp"
                         placeholder="Enter Name"
                       />{" "}
@@ -99,6 +124,9 @@ const EditProfile = () => {
                     <div>
                       <input
                         type="number"
+                        name="age"
+                        value={state.age}
+                        onChange={handleChange}
                         className="datainp"
                         placeholder="Enter Your Age"
                       />{" "}
@@ -119,6 +147,8 @@ const EditProfile = () => {
                     <div>
                       <input
                         type="date"
+                        name="dob"
+                        onChange={handleChange}
                         className="datainp"
                         placeholder="DD/MM/YYYY"
                       />{" "}
@@ -138,6 +168,9 @@ const EditProfile = () => {
                     <div>
                       <input
                         type="text"
+                        name="email"
+                        value={state.email}
+                        onChange={handleChange}
                         placeholder="Enter Email here"
                         className="datainp"
                       />{" "}
@@ -157,6 +190,9 @@ const EditProfile = () => {
                     <div>
                       <input
                         type="number"
+                        name="phone_number"
+                        value={state.phone_number}
+                        onChange={handleChange}
                         placeholder="Enter Phone number"
                         className="datainp"
                       />{" "}
@@ -176,6 +212,9 @@ const EditProfile = () => {
                     <div>
                       <input
                         type="text"
+                        name="address"
+                        value={state.address}
+                        onChange={handleChange}
                         placeholder="Enter address"
                         className="datainp"
                       />{" "}
@@ -196,9 +235,10 @@ const EditProfile = () => {
                     <div>
                     <div className="datainp">
                     <select
-                      value={selectedOption}
-                      onChange={handleOptionChange}
                       className="dropdownselect"
+                      name="gender"
+                      value={state.gender}
+                      onChange={handleChange}
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -222,7 +262,9 @@ const EditProfile = () => {
                     <div>
                       <input
                         type="file"
+                        name="age"
                         accept="image/*"
+                        onChange={handleFileChange}
                         className="datainp"
                         placeholder="Enter Your Age"
                       />{" "}
@@ -238,7 +280,7 @@ const EditProfile = () => {
 
           <div className="lastbutton678">
 
-                <button className="lastbutton01" >
+                <button className="lastbutton01" onClick={handleSubmit}>
 
                   <p>Update</p>
                 </button>

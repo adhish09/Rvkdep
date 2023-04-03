@@ -1,26 +1,42 @@
-import React from "react";
+import React, {useState, useEffect, useContext} from "react";
 import "./BookEvent.css";
 import img from "./1.png";
-import { useEffect, useState } from "react";
-import { Link, useNavigate, NavLink } from "react-router-dom";
-import { BsShare } from "react-icons/bs";
-import { MdArrowForward } from "react-icons/md";
-import { CgMailForward } from "react-icons/cg";
-import { FiUnlock } from "react-icons/fi";
-import { IoReturnUpForwardOutline } from "react-icons/io5";
+import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { ImLocation } from "react-icons/im";
 import { MdEventNote } from "react-icons/md";
 import { GiPublicSpeaker } from "react-icons/gi";
 import { useForm } from "react-hook-form";
+import axios from '../../services/apiService';
+import { AuthContext } from "../../contexts/AuthContext";
+
+
+function formatDjangoDateTime(djangoDatetimeObj) {
+  var jsDateObj = new Date(djangoDatetimeObj);
+
+  var options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
+  var formattedDate = jsDateObj.toLocaleString('en-US', options);
+
+  return formattedDate;
+}
+
+
 
 const BookEvent = () => {
 
   const [isDivOpen, setIsDivOpen] = useState(false);
+  const [event, setEvent] = useState({});
+
+  const { user } = useContext(AuthContext);
+  
+  console.log(user)
+
+  const {id} = useParams()
 
   const handleButtonClick = () => {
     setIsDivOpen(!isDivOpen);
   };
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -29,10 +45,31 @@ const BookEvent = () => {
     trigger,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post('/api/events/'+id+"/"+"register/", data);
+
+    } catch (error) {
+      console.error(error);
+    }
     reset();
   };
+
+
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const response = await axios.get('/api/events/'+id+"/");
+        console.log(response.data, "the event")
+        setEvent(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchEvent();
+  }, []);
 
   return (
     <div className="newss31">
@@ -43,14 +80,14 @@ const BookEvent = () => {
             <div className="card-container91170">
               <div className="card91170 ">
                 <div className="img91170">
-                  <img src={img} alt="img" />
+                  <img src={event.event_image} alt="img" />
                 </div>
               </div>
             </div>
             <div className="card-container91170">
               <div className="card91170 ">
                 <div className="card-body91170">
-                  <div className="card-title91170">Aarambh 2023 </div>
+                  <div className="card-title91170">{event.name}</div>
                 </div>
                 <div className="img91170">
                   <div className="eventbookdetailrow">
@@ -62,7 +99,7 @@ const BookEvent = () => {
                         <div className="colevent09">
                           Host Organizations
                           <div />
-                          <div className="colevent090">Programming Board</div>
+                          <div className="colevent090">{event.host}</div>
                         </div>
                       </div>
                     </div>
@@ -78,7 +115,7 @@ const BookEvent = () => {
                           Location
                           <div />
                           <div className="colevent090">
-                            Common Ground, Delhi
+                            {event.location}
                           </div>
                         </div>
                       </div>
@@ -95,7 +132,7 @@ const BookEvent = () => {
                           Begins
                           <div />
                           <div className="colevent090">
-                            Monday, April 3,2023 at 5:00PM IST
+                           {formatDjangoDateTime(event.start)}
                           </div>
                         </div>
                       </div>
@@ -112,7 +149,7 @@ const BookEvent = () => {
                           Ends
                           <div />
                           <div className="colevent090">
-                            Monday, April 3,2023 at 7:00PM IST
+                          {formatDjangoDateTime(event.end)}
                           </div>
                         </div>
                       </div>

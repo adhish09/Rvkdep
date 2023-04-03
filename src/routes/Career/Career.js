@@ -5,6 +5,9 @@ import "./Career.css";
 import { MdCloudUpload, MdDelete } from "react-icons/md";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import axios from 'axios';
+
+
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 const ACCEPTED_FILE_TYPES = [
   "application/pdf",
@@ -216,29 +219,70 @@ function Career() {
     (fileRejections[0].errors[0].code === "file-too-large" ||
       !ACCEPTED_FILE_TYPES.includes(fileRejections[0].file.type));
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    console.log(file);
-    // do something with the uploaded file
-  };
-  function handleSubmit(event) {
-    event.preventDefault();
-    // Submit form data to server
-  }
+      const [formData, setFormData] = useState({
+      });
+    
+      const [selectedOption, setSelectedOption] = useState("");
+      const [selectedFile, setSelectedFile] = useState(null);
+    
+      
+      function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData()
+    
+        data.append("name", formData['name'])
+        data.append("email", formData['email'])
+        data.append("phone", formData['phone'])
+        data.append("oppotunities", formData['oppotunities'])
+        data.append("qualification", formData['qualification'])
+        data.append("address", formData['address'])
+        data.append("cv",selectedFile )
+    
+        // Submit form data to server
+         axios.post('/api/careers/', data)
+        .then((response) => {
+          alert("You have successfully registered")
+        })
+        .catch((error) => {
+         alert(error)
+        });
+      }
+    
+    
+    
+      const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+      }
+    
+    
+      const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+      };
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [selectedOption, setSelectedOption] = useState("");
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const handleOptionChange = (event) => {
+  //   setSelectedOption(event.target.value);
+  // };
+  // const handleFileUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   console.log(file);
+  //   // do something with the uploaded file
+  // };
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   // Submit form data to server
+  // }
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+  // const [selectedFile, setSelectedFile] = useState(null);
+
+  // const handleFileChange = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  // };
 
   return (
     <div>
@@ -249,24 +293,29 @@ function Career() {
   <ContactSectionStyle>
         <div className="container967">
           <div className="contactSection__wrapper">
-            <div className="left">
+          <form className="left" onSubmit={handleSubmit}>
               <Div>Start your Career</Div>
               <Label>Name</Label>
               <br />
               <Input1
                 type="text"
                 id="name"
+                onChange={handleInputChange}
+                name = "name"
                 placeholder="Enter Your Name"
                 required
               />
               <br />
               <Label>Email</Label>
-              <Input type="email" id="email" placeholder="Email" required />
+              <Input type="email" id="email" placeholder="Email" required   onChange={handleInputChange}
+                name = "email" />
               <br />
               <Label>Mobile Number</Label>
               <Input
                 type="text"
                 id="name"
+                onChange={handleInputChange}
+                name = "phone"
                 placeholder="Mobile Number"
                 required
               />
@@ -275,6 +324,8 @@ function Career() {
               <Input
                 type="text"
                 id="qualification"
+                onChange={handleInputChange}
+                name = "qualification"
                 placeholder="Qualification"
                 required
               />
@@ -283,7 +334,8 @@ function Career() {
               <div className="dropdownvol01">
                 <select
                   value={selectedOption}
-                  onChange={handleOptionChange}
+                  onChange={handleInputChange}
+                  name = "opportunities"
                   className="dropdownselect01"
                 >
                   <option value="">-- Select an option --</option>
@@ -297,6 +349,8 @@ function Career() {
               <textarea
                 placeholder="Your Address"
                 rows="5"
+                onChange={handleInputChange}
+                name = "address"
                 className="caraddress"
               />
 
@@ -322,7 +376,7 @@ function Career() {
               <br />
               <Button type="submit">Submit</Button>
               <br />
-            </div>
+              </form>
             <div className="right">
               <Div4>
                 We are continuously looking for like-minded folks who have the

@@ -174,7 +174,7 @@ const Card = ({ item }) => {
             </div>
           </div>
           <div className="name">   {getTime(item.start)} to {getTime(item.end)}</div>
-          <NavLink to="bookevent"><div className="join">Join with us <BsArrowRight size={16}/> </div></NavLink>
+          <NavLink  to={`/event/${item.id}/details`}><div className="join">Join with us <BsArrowRight size={16}/> </div></NavLink>
 
           </div>
       </div>

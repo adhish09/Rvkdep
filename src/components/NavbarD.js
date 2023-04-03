@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import styled from "styled-components";
@@ -15,6 +15,9 @@ import MultiItemCarousel from "./LatestVideo/MultiItemCrousel";
 import MultiItemCarousel1 from "./Initiative/MultiItemCrousel";
 import MultiItemCarousel2 from "./Events/MultiItemCrousel";
 import Text from "./Text/Text";
+
+import { AuthContext } from "../contexts/AuthContext";
+
 const Button = styled.button`
   right: 0;
   margin: 2px;
@@ -47,6 +50,8 @@ function NavbarD() {
   const closeMobileMenu = () => setClick(false);
 
   const [modal, setModal] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -84,7 +89,13 @@ function NavbarD() {
                 </div>
 
                 <div>
-                  <button className="button587" onClick={toggleModal}>Login </button>
+                {!user ? (
+                    <Button onClick={toggleModal}>Login </Button>
+                  ) : (
+                    <Button to="login">
+                      <Link to="/profile">Profile</Link>
+                    </Button>
+                  )}
                   {modal && (
                     <div className="modal">
                       <div onClick={toggleModal} className="overlay"></div>

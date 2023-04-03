@@ -6,6 +6,8 @@ import { MdCall } from "react-icons/md";
 import { MdLocationPin } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaGlobeAmericas } from "react-icons/fa";
+import axios from 'axios';
+
 import "./Volunteer.css";
 
 const Div = styled.div`
@@ -194,9 +196,8 @@ const Label = styled.label`
 `;
 
 function Volunteer() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+  });
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (event) => {
@@ -207,21 +208,34 @@ function Volunteer() {
   const handleGenderChange = (event) => {
     setGender(event.target.value);
   };
+
   function handleSubmit(event) {
     event.preventDefault();
+    const newData = {...formData, gender:gender}
     // Submit form data to server
+     axios.post('/api/volunteers/', newData)
+    .then((response) => {
+      alert("You have successfully registered as a volunteer")
+    })
+    .catch((error) => {
+     alert(error)
+    });
   }
 
-  return (
-    <div>
-    <div className="eventallimage87">
-    <Image src={volunteerRvk} />
-  </div>
 
-  <ContactSectionStyle>
-        <div className="container967">
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+
+  return (
+  <div>
+      <Image src={volunteerRvk} />
+      <ContactSectionStyle>
+        <div className="container">
           <div className="contactSection__wrapper">
-            <div className="left">
+            <form className="left" onSubmit={handleSubmit}>
               <br />
               <Div>Join Us as a Volunteer</Div>
               <Label>Name</Label>
@@ -231,51 +245,69 @@ function Volunteer() {
                 id="name"
                 placeholder="Enter Your Name"
                 required
-              />
-              <br />
-              <Label>Age</Label>
-              <br />
-              <Input1
-                type="number"
-                id="age"
-                placeholder="Enter Your Age"
-                required
+                name="name"
+                onChange={handleInputChange}
               />
               <br />
               <Label>Gender</Label>
               <br />
-              <div className="dropdownvol">
-                <select
-                  value={selectedOption}
-                  onChange={handleOptionChange}
-                  className="dropdownselect"
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
+
+              <div className="gender">
+                <label className="malegender">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    checked={gender === "male"}
+                    onChange={handleGenderChange}
+                  />
+                  {""} Male
+                </label>
+                <label className="femalegender">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    checked={gender === "female"}
+                    onChange={handleGenderChange}
+                  />
+                  {""} Female
+                </label>
+                <label className="othergender">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="other"
+                    checked={gender === "other"}
+                    onChange={handleGenderChange}
+                  />
+                  {""} Other
+                </label>
               </div>
               <Label>Email</Label>
-              <Input type="email" id="email" placeholder="Email" required />
+              <Input type="email"  name="email" id="email" placeholder="Email" required onChange={handleInputChange} />
               <br />
 
               <Label>Mobile no.</Label>
-              <Input type="text" id="name" placeholder="Mobile no." required />
+              <Input type="text" id="name"   name="phone" placeholder="Mobile no." required  onChange={handleInputChange}/>
               <br />
               <Label>Address</Label>
               <br />
               <textarea
                 placeholder="Your Address"
                 rows="5"
+                name="address"
                 className="voladdress"
+                onChange={handleInputChange}
               />
               <Label>Area of Interest</Label>
               <br />
               <div className="dropdownvol">
                 <select
                   value={selectedOption}
-                  onChange={handleOptionChange}
+                  onChange={handleInputChange}
                   className="dropdownselect"
+                  name="area_of_interest"
                 >
                   <option value="">-- Select an option --</option>
                   <option value="option1">Option 1</option>
@@ -284,7 +316,7 @@ function Volunteer() {
                 </select>
               </div>
               <Button type="submit">Submit</Button>
-            </div>
+            </form>
             <div className="right">
               <Div4>
                 The Foundation is able to carry out its work thanks to the
