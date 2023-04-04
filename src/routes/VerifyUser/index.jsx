@@ -32,13 +32,13 @@ function VerifyUser() {
     <div>
      {!loading && userVerified?
      <div>
-        <h3>
+       
         <div className="card619">
         <div className='confirmation'> Welcome!</div>
          <div className='message-success'>You have successfully logged in.</div>
          <div className='explore'>Explore...</div>
        </div>
-       <Link to="login">Login here</Link></h3>
+       <Link to="login">Login here</Link>
      </div>:null}
 
     {!loading && !userVerified?
