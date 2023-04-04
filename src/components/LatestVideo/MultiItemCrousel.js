@@ -69,7 +69,7 @@ const NextBtn = (props) => {
     <>
       {currentSlide !== slideCount - slidesToShow && (
         <div className={className} onClick={onClick}>
-          <ArrowForwardIos style={{ color: '#a5a5a5', fontSize: '30px' }} />
+          <ArrowForwardIos style={{ color: '#a5a5a5', fontSize: '30px' , marginRight: '-15px'}} />
         </div>
       )}
     </>

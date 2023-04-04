@@ -23,13 +23,13 @@ const Footer = () => {
           </div>
           <div className="sb_footer-links_div">
             <h4>Links</h4><br/>
-            <a href="">
+            <a href="https://www.premrawat.com/" target="_blank" rel="noreferrer">
               <p>Prem Rawat</p>
             </a>
-            <a href="">
+            <a href="https://www.rvkproducts.com/" target="_blank" rel="noreferrer">
               <p>Rvk products</p>
             </a>
-            <a href="">
+            <a href="https://www.anjan.tv/" target="_blank" rel="noreferrer">
               <p>Anjan TV</p>
             </a>
           </div>
@@ -73,10 +73,13 @@ const Footer = () => {
         <div className="icon">
           <div className="socialmedia">
             <p>
-              <BsYoutube size={25} />
+            <a href="https://www.youtube.com/@rajvidyakender" target="_blank" rel="noreferrer">
+              <BsYoutube size={25} /></a>
             </p>
             <p>
+            <a href="https://www.facebook.com/rajvidyakender" target="_blank" rel="noreferrer">
               <FaFacebookSquare size={23} />
+              </a>
             </p>
           </div>
         </div>

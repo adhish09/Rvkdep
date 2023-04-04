@@ -90,11 +90,11 @@ function NavbarD() {
 
                 <div>
                 {!user ? (
-                    <Button onClick={toggleModal}>Login </Button>
+                  <button className="button587" onClick={toggleModal}>Login </button>
                   ) : (
-                    <Button to="login">
-                      <Link to="/profile">Profile</Link>
-                    </Button>
+                    <button to="login" className="button587">
+                      <Link to="/profile" className="profilemainbut89" >Profile</Link>
+                    </button>
                   )}
                   {modal && (
                     <div className="modal">

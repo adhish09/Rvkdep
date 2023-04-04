@@ -2,6 +2,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./carousel1.css";
+import { NavLink } from 'react-router-dom';
 import { BsArrowRight } from "react-icons/bs";
 import { data, multiData } from "./data";
 import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
@@ -14,6 +15,7 @@ const Menu = [
     image: "../Imgs/1.png",
     name: "Peace Education Program",
     place: "Delhi",
+    redirect: "pep",
   },
 
   {
@@ -21,24 +23,28 @@ const Menu = [
     image: "../Imgs/2.png",
     name: "Eye Camp",
     place: "Punjab",
+    redirect: "humanitarian",
   },
   {
     id: 3,
     image: "../Imgs/3.png",
     name: "Eye Camp",
     place: "Jaipur",
+    redirect: "humanitarian",
   },
   {
     id: 4,
     image: "../Imgs/4.png",
     name: "Food For People",
     place: "Ranchi",
+    redirect: "humanitarian",
   },
   {
     id: 5,
     image: "../Imgs/5.png",
     name: "COVID Relief Camp",
     place: "Delhi",
+    redirect: "humanitarian",
   },
 ];
 
@@ -72,8 +78,9 @@ const NextBtn = (props) => {
 };
 
 const carouselProperties = {
-  dots: true,
-  slidesToShow: 5,
+  prevArrow: <PreviousBtn />,
+  nextArrow: <NextBtn />,
+    slidesToShow: 5,
   slidesToScroll: 1,
   infinite: false,
   appendDots: (dots) => (
@@ -150,16 +157,17 @@ const MultiItemCarousel1 = () => {
         <div className="head">Initiatives</div>
         <Slider {...carouselProperties}>
           {Menu.map((curElem) => {
-            const { id, image, name, place } = curElem;
+            const { id, image, name, place, redirect} = curElem;
 
             return (
               <>
-                <div>
+                <div><NavLink to={redirect}>
                   <div className="cont">
+
                     <img className="multi__image" src={image} alt="" />
                     <div className="mtext">{name}</div>
                     <div className="text">{place}</div>
-                  </div>
+                  </div></NavLink>
                 </div>
                 <div className="colorbreak"></div>
               </>

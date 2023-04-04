@@ -99,6 +99,9 @@ hr{
 	padding: 0px 10px;
 }
 
+.socialmedia a{
+	color: rgb(226,195,148);
+}
 .sb_footer-links_div h4{
 	font-family: 'Raleway';
 font-style: normal;

@@ -35,12 +35,18 @@ class AuthService {
   }
 
   async sign_up(name, phone_number, email, password) {
+
+    const data = new FormData()
+
+    data.append("name", name)
+    data.append("phone_number", phone_number)
+    data.append("email", email)
+    data.append("password", password)
+
     try {
       const response = await axios.post(
         `/api/accounts/`,
-        {
-          name, phone_number, email, password
-        }
+        data
       );
 
       if (response.status === 201) {

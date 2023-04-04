@@ -59,7 +59,7 @@ function Home() {
       <div className="latest">
         <div className="latestvideo">
           <div className="lat1">Latest Videos</div>
-          <LVSlider />
+          <MultiItemCarousel />
         </div>
         <div className="break"></div>
         <div className="break"></div>

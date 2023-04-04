@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Text from './Text/Text';
 import NavbarD from './NavbarD.js';
 import NavbarM from './NavbarM.js';
+import Navbarnew from './Navbarnew';
 function Size() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -20,7 +21,7 @@ function Size() {
 
   return (
     <div>
-      {isMobile ? <NavbarD /> : <NavbarD />}
+      {isMobile ? <Navbarnew /> : <NavbarD />}
     </div>
   );
 }

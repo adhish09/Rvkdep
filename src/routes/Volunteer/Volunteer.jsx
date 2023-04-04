@@ -231,7 +231,9 @@ function Volunteer() {
 
   return (
   <div>
-      <Image src={volunteerRvk} />
+  <div className="eventallimage87">
+  <Image src={volunteerRvk} />
+</div>
       <ContactSectionStyle>
         <div className="container">
           <div className="contactSection__wrapper">

@@ -60,8 +60,9 @@ const NextBtn = (props) => {
 };
 
 const carouselProperties = {
-dots:true,
-  slidesToShow: 5,
+  prevArrow: <PreviousBtn />,
+  nextArrow: <NextBtn />,
+    slidesToShow: 5,
   slidesToScroll: 1,
   infinite: false,
   appendDots: (dots) => (
@@ -166,14 +167,14 @@ const Card = ({ item }) => {
         <div className="cardd">
           <div className="c2">
             <div className="r1">
-              <GoLocation style={{ color: "orange" }} /> Jaipur
+              <GoLocation style={{ color: "orange" }} /> {item.location}
             </div>
             <div className="r2">
               <AiOutlineClockCircle size={13} style={{ color: "orange" }} />
-              {item.location}
+              {getTime(item.start)} to {getTime(item.end)}
             </div>
           </div>
-          <div className="name">   {getTime(item.start)} to {getTime(item.end)}</div>
+          <div className="name">  {item.name} </div>
           <NavLink  to={`/event/${item.id}/details`}><div className="join">Join with us <BsArrowRight size={16}/> </div></NavLink>
 
           </div>

@@ -9,7 +9,28 @@ import { useEffect } from "react";
 import { GoLocation } from "react-icons/go";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
-import {NavLink } from "react-router-dom";
+import {Link } from "react-router-dom";
+
+
+// utility functions
+const getTime = (date)=>{
+
+  const dateObj = new Date(date);
+  const timeString = dateObj.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
+  
+  return timeString
+
+}
+
+const getDate=(date)=>{
+  const dateObj = new Date(date);
+  const options = { month: 'long', year: 'numeric' };
+  const dateString = dateObj.toLocaleString('en-US', options);
+  
+  return dateString;
+
+}
+
 
 let slidesToShow = 5;
 const PreviousBtn = (props) => {
@@ -40,11 +61,11 @@ const NextBtn = (props) => {
 };
 
 const carouselProperties = {
- dots:true,
+  prevArrow: <PreviousBtn />,
+  nextArrow: <NextBtn />,
   slidesToShow: 4,
   slidesToScroll: 1,
   infinite: false,
-
   // slidesToScroll={3}
   responsive: [
     {
@@ -76,14 +97,18 @@ const carouselProperties = {
     },
   ],
 };
-const MultiItemCarousel = () => {
+const MultiItemCarousel = ({old_events}) => {
   const [width, setWidth] = useState(window.innerWidth);
+  
+
+
   const updateWidth = () => {
     setWidth(window.innerWidth);
   };
 
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
+
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
@@ -100,13 +125,13 @@ const MultiItemCarousel = () => {
   return (
     <div style={{ margin: "20px" }} className="carousel">
       <div className="headings">
-        <div className="h2">Old events</div>
+        <div className="h2">Check our Old events</div>
         <div className="h3">
         Aarambh Series - 2022
         </div>
       </div>
       <Slider {...carouselProperties}>
-        {multiData.map((item) => (
+        {old_events.map((item) => (
           <Card item={item} />
         ))}
       </Slider>
@@ -115,12 +140,14 @@ const MultiItemCarousel = () => {
 };
 
 const Card = ({ item }) => {
+
+
   return (
     <div style={{ textAlign: "center", padding: "0px", margin: "20px" }}>
       <div className="eve">
         <img
           className="multi__image"
-          src={item}
+          src={item.event_image}
           alt=""
           style={{
             width: "100%",
@@ -131,17 +158,18 @@ const Card = ({ item }) => {
         <div className="cardd">
           <div className="c2">
             <div className="r1">
-              <GoLocation style={{ color: "orange" }} /> Jaipur
+              <GoLocation style={{ color: "orange" }} />{item.location}
             </div>
             <div className="r2">
               <AiOutlineClockCircle size={13} style={{ color: "orange" }} />
-               6:00AM to 8:00AM
+              {getTime(item.start)} to {getTime(item.end)}
             </div>
           </div>
-          <div className="name">Aarambh 2022</div>
-          <NavLink to="bookevent"><div className="join">Join with us <BsArrowRight size={16}/> </div></NavLink>
+          <div className="name">{item.name}</div>
+          {/* <Link to={`/event/${item.id}/register`}><div className="join">Join with us <BsArrowRight size={16}/> </div></Link> */}
 
           </div>
+        
       </div>
     </div>
   );

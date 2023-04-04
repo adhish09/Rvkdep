@@ -38,7 +38,7 @@ import Profile from "./routes/Profile/Profile";
 import EditProfile from "./routes/EditProfile/EditProfile";
 import Openimage from "./routes/Openimage/Openimage";
 import ErrorPage from "./routes/ErrorPage";
-
+import VerifyUser from './routes/VerifyUser/index.jsx';
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthContextProvider } from "./contexts/AuthContext";
 
@@ -141,6 +141,10 @@ const router = createBrowserRouter([
       {
         path: "openimage",
         element: <Openimage />,
+      },
+      {
+        path: "verify-user",
+        element: <VerifyUser/>,
       },
     ],
   },

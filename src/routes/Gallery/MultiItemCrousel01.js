@@ -102,9 +102,36 @@ const Menu = [
 
 
 let slidesToShow = 5;
+const PreviousBtn = (props) => {
+  console.log(props);
+  const { className, onClick, currentSlide } = props;
+  return (
+    <>
+      {currentSlide !== 0 && (
+        <div className={className} onClick={onClick}>
+          <ArrowBackIos style={{ color: '#a5a5a5', fontSize: '30px' }} />
+        </div>
+      )}
+    </>
+  );
+};
+const NextBtn = (props) => {
+  const { className, onClick, slideCount, currentSlide } = props;
+  console.log(props);
+  return (
+    <>
+      {currentSlide !== slideCount - slidesToShow && (
+        <div className={className} onClick={onClick}>
+          <ArrowForwardIos style={{ color: '#a5a5a5', fontSize: '30px' , marginRight: '-15px'}} />
+        </div>
+      )}
+    </>
+  );
+};
 
 const carouselProperties = {
- dots: true,
+  prevArrow: <PreviousBtn />,
+  nextArrow: <NextBtn />,
   slidesToShow: 5,
   slidesToScroll: 3,
   infinite: false,
@@ -164,7 +191,7 @@ const MultiItemCarousel01 = () => {
 
             return (
               <>
-              <div className = "main5769" style={{ textAlign: 'center', marginLeft: "35px" }}>
+              <div className = "main5769" style={{ textAlign: 'center', marginLeft: "20px" }}>
               <NavLink to = ""><img
                 className='multi__image784'
                 src={image}

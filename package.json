@@ -19,6 +19,7 @@
     "framer-motion": "^10.3.2",
     "google-map-react": "^2.2.0",
     "pdf-viewer-reactjs": "^2.2.3",
+    "razorpay": "^2.8.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",

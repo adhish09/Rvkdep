@@ -38,16 +38,15 @@ function Gallery() {
         <div className="lat1">Media Gallery</div>
         <MultiItemCarousel01 />
         <div className="break"></div>
-        <div className="break"></div>
         <div className="lat1">Glimpses</div>
         <MultiItemCarousel02 />
-        <div className="break"></div> <div className="break"></div>
+        <div className="break"></div>
         <div className="lat1">TV Interviews</div>
         <MultiItemCarousel03 />
-        <div className="break"></div> <div className="break"></div>
+        <div className="break"></div>
         <div className="lat1">Radio Interviews</div>
         <MultiItemCarousel04 />
-        <div className="break"></div> <div className="break"></div>
+        <div className="break"></div>
       </div></div>
     </div>
   );

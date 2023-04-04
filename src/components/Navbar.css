@@ -859,3 +859,34 @@ z-index: 1;
   width: 100px;
   display: flex;
 }
+.button587{
+  right: 0;
+  margin: 2px;
+  margin-right: 10px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1em;
+  background-color: #da9532;
+  border-radius: 25px;
+  padding: 7px 12px;
+  width: 80px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: #ededed;
+  cursor: pointer;
+}
+.button587:hover{
+  font-size: 16px;
+
+}
+.profilemainbut89{
+  color: white;
+}
