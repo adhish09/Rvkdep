@@ -60,6 +60,11 @@ class AuthService {
     } catch (e) {
       let error = "";
 
+      if (e.status==401){
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+      }
+
       const data = e.response.data;
       if ("email" in data.errors) {
         error = data.errors["email"][0];

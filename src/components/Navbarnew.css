@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Open Sans";
-    text-transform: capitalize;
     text-decoration: none;
 }
 body{
@@ -44,7 +43,6 @@ justify-content: center;
 align-items: center;
 line-height: 10px;
 letter-spacing: -0.05em;
-text-transform: uppercase;
 opacity: 0.8;
 }
 header .logo486 img{
