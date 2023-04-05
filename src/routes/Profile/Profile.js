@@ -98,7 +98,7 @@ function Profile() {
                       <div className="card-body-last9113163">
                         <div className="details3163">
                           <div className="data3163">Gender</div>
-                          <div className="data3164">{active_user.gender && active_user.gender}</div>
+                          <div className="data3164">{active_user.gender}</div>
                           <div></div>
                         </div>
                       </div>

@@ -90,48 +90,13 @@ function NavbarD() {
 
                 <div>
                 {!user ? (
-                  <button className="button587" onClick={toggleModal}>Login </button>
+                  <button className="button587" onClick={toggleModal}><NavLink to="login" className="profilemainbut89">Login</NavLink> </button>
                   ) : (
                     <button to="login" className="button587">
                       <Link to="/profile" className="profilemainbut89" >Profile</Link>
                     </button>
                   )}
-                  {modal && (
-                    <div className="modal">
-                      <div onClick={toggleModal} className="overlay"></div>
-                      <div className="modalBackground">
-                        <div className="modalContainer">
-                          <div className="titleCloseBtn">
-                            <button onClick={toggleModal}><IoCloseOutline style={{color:"black"}}/></button>
-                          </div>
 
-                          <div className="body">
-                            <p>
-                              Login or create an account to save your progress
-                              and see your stats
-                            </p>
-                          </div>
-                          <div>
-                            <NavLink to="login">
-                              <button onClick={toggleModal} className="button">
-                                Login
-                              </button>
-                            </NavLink>
-                            <br />
-                            <NavLink to="signup">
-                            <button onClick={toggleModal} className="button">
-                              SignUp
-                            </button>
-                          </NavLink>
-                            <div className="mid">OR</div>
-                            <button className="button" onClick={toggleModal}>
-                              Skip to explore
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
               <div className="roww2">

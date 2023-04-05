@@ -37,6 +37,9 @@
 .multi__image784{
   width: 320px;
 height: 200px;
+position: relative;
+
+
 }
 .multi__image784:hover{
   box-shadow: 0px 0px 10px rgba(0,0,0,0.8);

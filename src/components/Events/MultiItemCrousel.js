@@ -12,20 +12,23 @@ import { NavLink } from "react-router-dom";
 import axios from '../../services/apiService';
 
 // utility functions
-function formatDateTime(dateTimeString) {
-  const myDateTime = new Date(dateTimeString);
-  const formattedDateTime = myDateTime.toLocaleString('en-US', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-    timeZone: 'UTC'
-  }).replace(/(\d+)\/(\d+)\/(\d+)/, "$2-$1-$3"); // replace slashes with hyphens
-  return formattedDateTime;
+const getTime = (date)=>{
+
+  const dateObj = new Date(date);
+  const timeString = dateObj.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
+
+  return timeString
+
 }
 
+const getDate=(date)=>{
+  const dateObj = new Date(date);
+  const options = { month: 'long', year: 'numeric' };
+  const dateString = dateObj.toLocaleString('en-US', options);
+
+  return dateString;
+
+}
 
 
 let slidesToShow = 5;
@@ -150,7 +153,8 @@ const MultiItemCarousel2 = () => {
 const Card = ({ item }) => {
   return (
     <div style={{ textAlign: "center", padding: "0px", margin: "20px" }}>
-      <div className="eve">
+    <NavLink  to={`/event/${item.id}/details`}>
+    <div className="eve">
         <img
           className="multi__image001"
           src={item.event_image}
@@ -168,14 +172,14 @@ const Card = ({ item }) => {
             </div>
             <div className="r2">
               <AiOutlineClockCircle size={13} style={{ color: "orange" }} />
-              {formatDateTime(item.start)} 
+              {getTime(item.start)} to {getTime(item.end)}
             </div>
           </div>
           <div className="name">  {item.name} </div>
-          <NavLink  to={`/event/${item.id}/details`}><div className="join">Join with us <BsArrowRight size={16}/> </div></NavLink>
+          <div className="join">Join with us <BsArrowRight size={16}/> </div>
 
           </div>
-      </div>
+      </div></NavLink>
     </div>
   );
 };

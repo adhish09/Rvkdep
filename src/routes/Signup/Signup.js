@@ -132,7 +132,6 @@ function Login() {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </div>
-              <div className="ppp">Forgot password ?*</div>
               <button className="button101" onClick={toggleModall}>
                 SignUp
               </button>
@@ -146,7 +145,7 @@ function Login() {
             </form>
             <div className="body1101">
               <p>
-                Already have an account? <span>Sign in</span>
+                Already have an account? <NavLink to = "login"><span>Sign in</span></NavLink>
               </p>
             </div>
           </div>

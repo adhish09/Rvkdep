@@ -111,7 +111,7 @@ function Login() {
             </form>
             <div className="body11">
               <p>
-                Don’t have an account? <span>Sign up</span>
+                Don’t have an account? <NavLink to="signup"> <span>Sign up</span></NavLink>
               </p>
             </div>
           </div>

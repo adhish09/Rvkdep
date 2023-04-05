@@ -83,7 +83,8 @@ color: #000000;
   .main-card--cointainer911321 {
     display: grid;
     grid-template-columns: repeat(4, minmax(250px, 680px));
-
+border: 2px solid blue;
+flex-direction: row;
     margin-bottom:30px;
     margin-left: 30px;
     margin-right: 30px;
@@ -117,6 +118,8 @@ height: 350px;}
     position: relative;
     max-width: 850px;
     min-width: auto;
+    border: 2px solid red;
+display: grid;
   }
 
 

@@ -17,7 +17,7 @@ function Home() {
   const closeMobileMenu = () => setClick(false);
   return (
     <div className="countermain">
-      <div>
+      <div style={{marginTop:'30px'}}>
         <Slider />
       </div>
 
