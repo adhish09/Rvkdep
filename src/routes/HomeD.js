@@ -8,9 +8,11 @@ import MultiItemCarousel1 from "../components/Initiative/MultiItemCrousel";
 import MultiItemCarousel2 from "../components/Events/MultiItemCrousel";
 import Text from "../components/Text/Text";
 import { motion } from "framer-motion";
-
+import CountUp from 'react-countup';
 import "./Navbar01.css";
+import ScrollTrigger from 'react-scroll-trigger';
 function Home() {
+  const [counterOn, setCounterOn] = useState(false);
   const [click, setClick] = useState(false);
   const isMobile = window.innerWidth < 900;
   const handleClick = () => setClick(!click);
@@ -25,8 +27,11 @@ function Home() {
           <div className="livedata">
             <div className="phase1">
               <p className="m">
-                15M+
-                <br />
+              <ScrollTrigger style={{marginBottom:'-15px'}} onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
+              <div>
+              {counterOn && <CountUp start={0} end={50} duration={2} delay={0}/>}M+
+              </div>
+              </ScrollTrigger>                <br />
                 <div className="lined"></div>
               </p>
               <p className="mtext">People benefitted from this message</p>
@@ -34,8 +39,11 @@ function Home() {
             <div className="phase2">
               <div className="phase2text">
                 <p className="m">
-                  80K+
-                  <br />
+                <ScrollTrigger style={{marginBottom:'-15px'}} onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
+                <div>
+                {counterOn && <CountUp start={0} end={80} duration={4} delay={0}/>}K+
+                </div>
+                </ScrollTrigger>                   <br />
                   <div className="lined"></div>
                 </p>
                 <p className="mtext">Visitor count</p>
@@ -58,6 +66,9 @@ function Home() {
       )}
       <div className="latest">
         <div className="latestvideo">
+
+
+
           <div className="lat1">Latest Videos</div>
           <MultiItemCarousel />
         </div>

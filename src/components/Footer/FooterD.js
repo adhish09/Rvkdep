@@ -7,10 +7,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="sb_footer section_padding">
-      <div className="logofooter">
-        <div><img src={RVK} /></div>
-        <div className="footername">Raj Vidya Kender</div>
-        </div>
+
         <div className="sb_footer-links">
           <div className="sb_footer-links_main">
             <h4>Subscribe Now</h4>
@@ -22,11 +19,20 @@ const Footer = () => {
             </div>
           </div>
           <div className="sb_footer-links_div">
-            <h4>Links</h4><br/>
-            <a href="https://www.premrawat.com/" target="_blank" rel="noreferrer">
+            <h4>Links</h4>
+            <br />
+            <a
+              href="https://www.premrawat.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <p>Prem Rawat</p>
             </a>
-            <a href="https://www.rvkproducts.com/" target="_blank" rel="noreferrer">
+            <a
+              href="https://www.rvkproducts.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <p>Rvk products</p>
             </a>
             <a href="https://www.anjan.tv/" target="_blank" rel="noreferrer">
@@ -34,7 +40,8 @@ const Footer = () => {
             </a>
           </div>
           <div className="sb_footer-links_div">
-            <h4>Getting involved</h4><br/>
+            <h4>Getting involved</h4>
+            <br />
             <a href="">
               <p>Career</p>
             </a>
@@ -58,7 +65,8 @@ const Footer = () => {
             </a>
           </div>
           <div className="sb_footer-links_div">
-            <h4>Address:</h4><br/>
+            <h4>Address:</h4>
+            <br />
             <a href="">
               <p>Chattarpur, Chandanhula, New Delhi - 110074</p>
             </a>
@@ -73,17 +81,26 @@ const Footer = () => {
         <div className="icon">
           <div className="socialmedia">
             <p>
-            <a href="https://www.youtube.com/@rajvidyakender" target="_blank" rel="noreferrer">
-              <BsYoutube size={25} /></a>
+              <a
+                href="https://www.youtube.com/@rajvidyakender"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <BsYoutube size={25} />
+              </a>
             </p>
             <p>
-            <a href="https://www.facebook.com/rajvidyakender" target="_blank" rel="noreferrer">
-              <FaFacebookSquare size={23} />
+              <a
+                href="https://www.facebook.com/rajvidyakender"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaFacebookSquare size={23} />
               </a>
             </p>
           </div>
         </div>
-<hr/>
+        <hr />
         <div className="sb_footer-below">
           <div className="sb_footer-copyright">
             <p>

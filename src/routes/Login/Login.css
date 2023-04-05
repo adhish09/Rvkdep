@@ -19,7 +19,7 @@ body.active-modal1 {
     position: fixed;
   }
   .modal1{
-  z-index: 1;
+  z-index: 1200;
   }
 
   .overlay1 {

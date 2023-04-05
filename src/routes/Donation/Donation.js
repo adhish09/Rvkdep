@@ -143,7 +143,7 @@ const Donation = () => {
                 <div className="submitamt">
                   {inputValue ? (
                     <button className="submitamt" type="submit" onClick={handleSubmit}>
-                      <a href="https://test.payumoney.com/url/1IhTHPRcVf8z" className="submitamt">Donate Now</a>
+                      <NavLink to="/detail" className="submitamt">Donate Now</NavLink>
                     </button>
                   ) : (
                     <button className="submitamt01" type="submit" disabled>
