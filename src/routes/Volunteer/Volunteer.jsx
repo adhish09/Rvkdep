@@ -6,9 +6,10 @@ import { MdCall } from "react-icons/md";
 import { MdLocationPin } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaGlobeAmericas } from "react-icons/fa";
-import axios from 'axios';
+import axios from '../../services/apiService';
 
 import "./Volunteer.css";
+import { toast } from "react-hot-toast";
 
 const Div = styled.div`
   font-family: "Open Sans";
@@ -17,9 +18,9 @@ const Div = styled.div`
   font-size: 24px;
   margin-bottom: 10px;
   line-height: 30px;
-  margin-left: 20%;
+  margin-left: 10%;
   color: #da9532;
-  padding: 2px 5px;
+  padding: 5px 5px 5px 0px ;
   margin-top: 7px;
 `;
 
@@ -31,7 +32,7 @@ const Textarea632 = styled.textarea`
   border-radius: 6px;
   padding: 2px 5px;
   margin-top: 2px;
-  margin-left: 20%;
+  margin-left: 10%;
   margin-right: 5%;
   font-size: 14px;
 `;
@@ -43,7 +44,7 @@ const Input = styled.input`
   border-radius: 6px;
   padding: 2px 5px;
   margin-top: 2px;
-  margin-left: 20%;
+  margin-left: 10%;
   margin-right: 5%;
   font-size: 14px;
   outline: blue;
@@ -56,7 +57,7 @@ const Input1 = styled.input`
   border-radius: 6px;
   padding: 2px 5px;
   margin-top: 2px;
-  margin-left: 20%;
+  margin-left: 10%;
   margin-right: 5%;
   font-size: 14px;
   outline: blue;
@@ -68,11 +69,11 @@ const Image = styled.img`
   height: auto;
   align-items: center;
 `;
-const Button = styled.button`
+export const Button = styled.button`
   padding: 7px 15px;
   margin-top: 24px;
   margin-bottom:35px;
-  margin-left: 20%;
+  margin-left: 10%;
   background-color: #da9532;
   color: white;
   font-size: 20px;
@@ -120,7 +121,7 @@ const ContactSectionStyle = styled.div`
   }
   .right {
     max-width: 100%;
-    padding: 40px 40px;
+    padding: 50px 40px;
     width: 100%;
     border-radius: 12px;
   }
@@ -181,44 +182,38 @@ const Div4 = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 35px;
+  line-height: 26px;
   display: flex;
   align-items: center;
-  text-align: justify;
+  margin-left:10%;
   letter-spacing: 0.1em;
-  color:black;
+  color:#4a4a4a;
   word-spacing:0.8px;
 `;
 const Label = styled.label`
-  margin-left: 20%;
+  margin-left: 10%;
   font-weight: 500;
   font-size: 16px;
 `;
 
 function Volunteer() {
+  window.scrollTo(0,0)
+
   const [formData, setFormData] = useState({
   });
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-  const [gender, setGender] = useState("");
-
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
-  };
 
   function handleSubmit(event) {
     event.preventDefault();
-    const newData = {...formData, gender:gender}
+    const newData = {...formData }
+
     // Submit form data to server
      axios.post('/api/volunteers/', newData)
     .then((response) => {
-      alert("You have successfully registered as a volunteer")
+           toast.success("Join Us as a Volunteer")
     })
     .catch((error) => {
-     alert(error)
+
+     toast.error(error.data.message)
     });
   }
 
@@ -230,7 +225,7 @@ function Volunteer() {
 
 
   return (
-  <div>
+  <div  >
   <div className="eventallimage87">
   <Image src={volunteerRvk} />
 </div>
@@ -255,36 +250,19 @@ function Volunteer() {
               <br />
 
               <div className="gender">
-                <label className="malegender">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="male"
-                    checked={gender === "male"}
-                    onChange={handleGenderChange}
-                  />
-                  {""} Male
-                </label>
-                <label className="femalegender">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="female"
-                    checked={gender === "female"}
-                    onChange={handleGenderChange}
-                  />
-                  {""} Female
-                </label>
-                <label className="othergender">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="other"
-                    checked={gender === "other"}
-                    onChange={handleGenderChange}
-                  />
-                  {""} Other
-                </label>
+              <select
+                  // value={selectedOption}
+                  onChange={handleInputChange}
+                  className="dropdownselect"
+                  name="gender"
+                >
+                  <option value="">-- Select an option --</option>
+                  <option value="male">Male</option>
+                  <option value="female">FeMale</option>
+                  <option value="other">Other</option>
+                </select>
+
+
               </div>
               <Label>Email</Label>
               <Input type="email"  name="email" id="email" placeholder="Email" required onChange={handleInputChange} />
@@ -292,6 +270,9 @@ function Volunteer() {
 
               <Label>Mobile no.</Label>
               <Input type="text" id="name"   name="phone" placeholder="Mobile no." required  onChange={handleInputChange}/>
+              <br />
+              <Label>Age</Label>
+              <Input type="number" id="age"   name="age" placeholder="Age" min='10'  mx="100" required  onChange={handleInputChange}/>
               <br />
               <Label>Address</Label>
               <br />
@@ -306,20 +287,20 @@ function Volunteer() {
               <br />
               <div className="dropdownvol">
                 <select
-                  value={selectedOption}
+                  // value={selectedOption}
                   onChange={handleInputChange}
                   className="dropdownselect"
                   name="area_of_interest"
                 >
                   <option value="">-- Select an option --</option>
-                  <option value="option1">Option 1</option>
+                  <option value="option1" className="t">Option 1</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
                 </select>
               </div>
               <Button type="submit">Submit</Button>
             </form>
-            <div className="right">
+            <div className="right" >
               <Div4>
                 The Foundation is able to carry out its work thanks to the
                 contribution of numerous volunteers. These volunteers, who come

@@ -3,7 +3,7 @@ import HomeD from './HomeD.js';
 import HomeM from './HomeM.js';
 function Home() {
   const [isMobile, setIsMobile] = useState(false);
-
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 668);

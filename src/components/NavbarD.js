@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import i16n from "../i18n";
+import {useTranslation } from 'react-i18next';
+import i18n from "../i18n";
 import styled from "styled-components";
 import Logo from "./Images/Logo.png";
 import { IoCloseOutline } from "react-icons/io5";
@@ -48,6 +51,14 @@ function NavbarD() {
   const isMobile = window.innerWidth < 900;
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (ln) =>{
+    return()=>{
+      i18n.changeLanguage(ln);
+      console.log(`Language changed to ${ln}`);
+    }
+  }
 
   const [modal, setModal] = useState(false);
 
@@ -64,13 +75,13 @@ function NavbarD() {
   }
 
   return (
-    <>
-      <IconContext.Provider value={{ color: "#fff" }}>
+    <div className="navbar-sec">
+      <IconContext.Provider value={{ color: "#F1F1F1" }}>
         <nav className="navbar">
-          <div className="navbar-container container">
+          <div className="navbar-container ">
             <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
               <img src={Logo} alt="img" className="navbar-icon" />
-              Raj Vidya Kender
+              {t('RVK')}
             </Link>
 
             <div className="menu-icon" onClick={handleClick}>
@@ -83,17 +94,24 @@ function NavbarD() {
 
             <ul className={click ? "nav-menu active" : "nav-menu"}>
               <div className="roww">
-                <div className="language">
-                  Language
-                  <MdArrowDropDown style={{ color: "#858585" }} />
-                </div>
+              <div className="right-menu0101">
+              <div className="menu-button0101"> Language<MdArrowDropDown style={{ color: "#858585" }}/></div>
+              <div className="dropdown-menu0101">
 
-                <div>
-                {!user ? (
-                  <button className="button587" onClick={toggleModal}><NavLink to="login" className="profilemainbut89">Login</NavLink> </button>
+                  <a href="#"><button className="translanguagebutton" onClick={changeLanguage("en")}>English</button></a>
+
+                  <a href="#"><button className="translanguagebutton" onClick={changeLanguage("hi")}>हिंदी</button></a>
+              </div>
+            </div>
+            
+                            <div>
+                  {!user ? (
+                    <button className="button587" onClick={toggleModal}>
+                      <NavLink to="login" className="profilemainbut89">{t('Login')}</NavLink>
+                       </button>
                   ) : (
                     <button to="login" className="button587">
-                      <Link to="/profile" className="profilemainbut89" >Profile</Link>
+                      <Link to="/profile" className="profilemainbut89" style={{textTransform:"capitalize"}} >{user?.name===null?"profile":user?.name?.slice(0,5)}</Link>
                     </button>
                   )}
 
@@ -109,7 +127,7 @@ function NavbarD() {
                     }
                     onClick={closeMobileMenu}
                   >
-                    Home
+                    {t('Home')}
                   </NavLink>
                 </li>
                 <li className="nav-item">
@@ -120,7 +138,7 @@ function NavbarD() {
                     }
                     onClick={closeMobileMenu}
                   >
-                    News
+                    {t('News')}
                   </NavLink>
                 </li>
 
@@ -132,17 +150,17 @@ function NavbarD() {
                     onClick={closeMobileMenu}
                   >
                     <div className="right-menu">
-                      <div className="menu-button">Initiatives</div>
+                      <div className="menu-button">{t('Initiatives')}</div>
                       <div className="dropdown-menu">
                         <NavLink to="humanitarian">
-                          <a> Humanitarian</a>
+                          <a> {t('Humanitarian')}</a>
                         </NavLink>
                         <NavLink to="pep">
                           {" "}
-                          <a>Peace Education Program</a>
+                          <a>{t('Peace Education Program')}</a>
                         </NavLink>
                         <NavLink to="pek">
-                          <a>Peace Education and Knowledge</a>
+                          <a>{t('PEAK')}</a>
                         </NavLink>
                       </div>
                     </div>
@@ -156,18 +174,18 @@ function NavbarD() {
                     onClick={closeMobileMenu}
                   >
                     <div className="right-menu">
-                      <div className="menu-button"> Get Involved</div>
+                      <div className="menu-button"> {t('Involved')}</div>
                       <div className="dropdown-menu">
                         <NavLink to="volunteer">
-                          <a href="#">Volunteer</a>
+                          <a href="#">{t('Volunteer')}</a>
                         </NavLink>
                         <NavLink to="career">
                           {" "}
-                          <a href="#">Career</a>
+                          <a href="#">{t('Career')}</a>
                         </NavLink>
-                        <NavLink to="donation">
+                        <NavLink to="donation" onClick={()=>  window.scrollTo(0,0)}>
                           {" "}
-                          <a href="#">Donation</a>
+                          <a href="#">{t('Donation')}</a>
                         </NavLink>
                       </div>
                     </div>
@@ -181,64 +199,62 @@ function NavbarD() {
                     onClick={closeMobileMenu}
                   >
                     <div className="right-menu">
-                      <div className="menu-button"> About</div>
+                      <div className="menu-button"> {t('About')}</div>
                       <div className="dropdown-menu">
-                        <NavLink to="rvk">
+                        <NavLink to="rvk" onClick={()=>window.scrollTo(0,0)}>
                           {" "}
-                          <a href="#">RVK</a>
+                          <a href="#">{t('RVK1')}</a>
                         </NavLink>
                         <NavLink to="pr">
                           {" "}
-                          <a href="#">Prem Rawat</a>
+                          <a href="#">{t('Prem Rawat')}</a>
                         </NavLink>
                       </div>
                     </div>
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                <NavLink
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  <div className="right-menu01">
-                    <div className="menu-button01">  More
-                    <IoGrid
-                      className="gridicon"
-                      style={{
-                        color: "#DA9532",
-                        fontSize: "28",
-                        paddingLeft: "10",
-                      }}
-                      onMouseOver={({ target }) =>
-                        (target.style.color = "#DA9532")
-                      }
-                      onMouseOut={({ target }) =>
-                        (target.style.color = "#DA9532")
-                      }
-                    /></div>
-                    <div className="dropdown-menu01">
-                    <NavLink to="profile">
-                    {" "}
-                    <a href="#">Profile</a>
-                  </NavLink>
-                      <NavLink to="gallery">
-                        {" "}
-                        <a href="#">Gallery</a>
-                      </NavLink>
-                      <NavLink to="eventsall">
-                        {" "}
-                        <a href="#">Events</a>
-                      </NavLink>
-                      <NavLink to="contact">
-                        {" "}
-                        <a href="#">Contact</a>
-                      </NavLink>
+                  <NavLink
+                    className={({ isActive }) =>
+                      "nav-links" + (isActive ? " activated" : "")
+                    }
+                    onClick={closeMobileMenu}
+                  >
+                    <div className="right-menu01">
+                      <div className="menu-button01"> {t('More')}
+                        <IoGrid
+                          className="gridicon"
+                          style={{
+                            color: "#DA9532",
+                            fontSize: "28",
+                            paddingLeft: "10",
+                          }}
+                          onMouseOver={({ target }) =>
+                            (target.style.color = "#DA9532")
+                          }
+                          onMouseOut={({ target }) =>
+                            (target.style.color = "#DA9532")
+                          }
+                        /></div>
+                      <div className="dropdown-menu01">
+
+                        <NavLink to="gallery">
+                          {" "}
+                          <a href="#">{t('Gallery')}</a>
+                        </NavLink>
+                        <NavLink to="eventsall">
+                          {" "}
+                          <a href="#">{t('Events')}</a>
+                        </NavLink>
+                        <NavLink to="contact">
+                          {" "}
+                          <a href="#">{t('Contact')}</a>
+                        </NavLink>
+                       
+                      </div>
                     </div>
-                  </div>
-                </NavLink>
-              </li>
+                  </NavLink>
+                </li>
 
 
 
@@ -249,7 +265,7 @@ function NavbarD() {
           </div>
         </nav>
       </IconContext.Provider>
-    </>
+    </div>
   );
 }
 

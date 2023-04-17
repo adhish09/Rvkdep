@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Donation.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
@@ -8,19 +8,71 @@ import { CgMailForward } from "react-icons/cg";
 import { FiUnlock } from "react-icons/fi";
 import { IoReturnUpForwardOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
+import axios from "../../services/apiService";
+import { AuthContext } from "../../contexts/AuthContext";
+import { toast } from "react-hot-toast";
 
-const Detail = () => {
+ 
+const Detail = (props) => {
+   
+  const {donate}=useContext(AuthContext)
+ 
   const navigate = useNavigate();
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
     trigger,
+    
   } = useForm();
-
+  const handlePayment = data =>{
+    axios.post('/api/donate/', {...data,amount:donate})
+    .then((response) => {
+     toast.success(<>{response.data.message}</>)
+    })
+    .catch((error) => {
+     alert(error)
+     toast.error(<h1>{error.data.message}</h1>)
+    });
+  }
   const onSubmit = (data) => {
-    console.log(data);
+    if (donate=== "") {
+      alert("please enter amount");
+    } else {
+      try {
+        var options = {
+          key: "rzp_test_2y68LXTdn3DKK9",
+          key_secret: "GU6RrUGnP2KId7WFSrMULPus",
+          amount: donate * 100,
+          currency: "INR",
+          name: "Rvk",
+          description: "for testing purpose",
+          handler: function (response) {
+            handlePayment(response);
+            alert('Payment successful!');
+          },
+          prefill: {
+            name: data.name,
+            email: data.email,
+            contact: data?.phone_number,
+          },
+          notes: {
+            address: data.address,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+       
+        var pay = new window.Razorpay(options);
+       
+        pay.open();
+      } catch (error) {
+   
+      }
+    }
     reset();
   };
   const [isCheckedYes, setIsCheckedYes] = useState(false);
@@ -50,16 +102,16 @@ const Detail = () => {
     }
     setIsChecked1(event.target.checked);
   };
-
+  
   const handleCheckbox2Change = (event) => {
     if (isChecked1) {
       setIsChecked1(false);
     }
     setIsChecked2(event.target.checked);
   };
-
+   
   return (
-    <div className="newss313">
+    <div className="newss313" style={{paddingTop:"100px"}}>
       <div className="backcont">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="donationhead01">
@@ -80,7 +132,7 @@ const Detail = () => {
                         className={`form-control ${
                           errors.name && "invalid"
                         } datainp`}
-                        {...register("name", {
+                        {...register("first_name", {
                           required: "First Name is Required",
                         })}
                         onKeyUp={() => {
@@ -111,7 +163,7 @@ const Detail = () => {
                         className={`form-control ${
                           errors.namel && "invalid"
                         } datainp`}
-                        {...register("namel", {
+                        {...register("last_name", {
                           required: "Last Name is Required",
                         })}
                         onKeyUp={() => {
@@ -178,7 +230,7 @@ const Detail = () => {
                         className={`form-control ${
                           errors.phone && "invalid"
                         } datainp`}
-                        {...register("phone", {
+                        {...register("phone_number", {
                           required: "Phone is Required",
                           pattern: {
                             value:
@@ -273,7 +325,7 @@ const Detail = () => {
                         className={`form-control ${
                           errors.pin && "invalid"
                         } datainp`}
-                        {...register("pin", {
+                        {...register("pin_code", {
                           required: "Pin Code is Required",
                         })}
                         onKeyUp={() => {
@@ -425,7 +477,7 @@ const Detail = () => {
           </section>
           <div className="basecheck">
             <div>
-              <input type="checkbox" />
+              <input type="checkbox" required />
             </div>
             <div className="tandc">
               <p>

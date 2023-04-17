@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 let slidesToShow = 5;
 const PreviousBtn = (props) => {
-  console.log(props);
+ 
   const { className, onClick, currentSlide } = props;
   return (
     <>

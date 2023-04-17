@@ -7,12 +7,13 @@ import { BsArrowRight } from "react-icons/bs";
 import { data, multiData } from "./data";
 import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { useEffect } from "react";
 
 const Menu = [
   {
     id: 1,
-    image: "../Imgs/1.png",
+    image: "../Imgs/I1.jpeg",
     name: "Peace Education Program",
     place: "Delhi",
     redirect: "pep",
@@ -20,31 +21,31 @@ const Menu = [
 
   {
     id: 2,
-    image: "../Imgs/2.png",
-    name: "Eye Camp",
+    image: "../Imgs/I2.jpg",
+    name: "Food for People",
     place: "Punjab",
     redirect: "humanitarian",
   },
   {
     id: 3,
-    image: "../Imgs/3.png",
-    name: "Eye Camp",
+    image: "../Imgs/I3.jpeg",
+    name: "Peace Education Program",
     place: "Jaipur",
-    redirect: "humanitarian",
+    redirect: "pep",
   },
   {
     id: 4,
-    image: "../Imgs/4.png",
-    name: "Food For People",
+    image: "../Imgs/I4.jpg",
+    name: "COVID Relief Camp",
     place: "Ranchi",
     redirect: "humanitarian",
   },
   {
     id: 5,
-    image: "../Imgs/5.png",
-    name: "COVID Relief Camp",
+    image: "../Imgs/I5.jpg",
+    name: "Peace Education Program",
     place: "Delhi",
-    redirect: "humanitarian",
+    redirect: "pep",
   },
 ];
 
@@ -132,6 +133,8 @@ const carouselProperties = {
 
 const MultiItemCarousel1 = () => {
   const [width, setWidth] = useState(window.innerWidth);
+  const { t, i18n } = useTranslation();
+
   const updateWidth = () => {
     setWidth(window.innerWidth);
   };
@@ -154,7 +157,7 @@ const MultiItemCarousel1 = () => {
   return (
     <div className="carousel">
       <div className="bg01">
-        <div className="head">Initiatives</div>
+        <div className="head"> {t('Initiatives')} </div>
         <Slider {...carouselProperties}>
           {Menu.map((curElem) => {
             const { id, image, name, place, redirect} = curElem;
@@ -164,9 +167,8 @@ const MultiItemCarousel1 = () => {
                 <div><NavLink to={redirect}>
                   <div className="cont">
 
-                    <img className="multi__image" src={image} alt="" />
+                    <img className="multi__image0578" src={image} alt="" />
                     <div className="mtext">{name}</div>
-                    <div className="text">{place}</div>
                   </div></NavLink>
                 </div>
                 <div className="colorbreak"></div>

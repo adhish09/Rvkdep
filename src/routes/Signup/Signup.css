@@ -140,6 +140,11 @@ margin-bottom: 8%;
     background: #DA9532;
     border-radius: 10px;
     cursor: pointer;
+    transition: 0.3s ease-in-out ;
+  }
+  .button101:hover{
+     font-size: 20px;
+     text-decoration: underline;
   }
   .terms{
     font-family: 'Open Sans';

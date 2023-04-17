@@ -143,6 +143,7 @@ margin-left: 1px;
       padding-top: 10px;
     }}
   .img1456 {
+    text-align: left;
     max-width: 930px;
     min-width: 200px;
     height: auto;
@@ -156,17 +157,17 @@ margin-left: 1px;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 35px;
+    line-height: 26px;
     word-spacing: 0.8px;
     display: flex;
     align-items: center;
-    text-align: justify;
+    
     letter-spacing: 0.1em;
   }
   @media ( max-width:1800px){
 .img1456{
   font-size: 16px;
-  line-height: 35px;
+  line-height: 26px;
 
 }
 }
@@ -309,7 +310,7 @@ margin-left: 1px;
     line-height: 35px;
     display: flex;
     align-items: center;
-    text-align: justify;
+    
     letter-spacing: 0.1rem;
   }
 
@@ -351,9 +352,9 @@ margin-left: 1px;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 35px;
+    line-height: 25px;
     word-spacing: 0.8px;
-    text-align: justify;
+    
     letter-spacing: 0.1em;
     background-color: white;
   }
@@ -389,7 +390,7 @@ margin-left: 1px;
   line-height: 33px;
   display: flex;
   align-items: center;
-  text-align: justify;
+  
   letter-spacing: 0.1em;
   color: #DA9532;
   padding-left: 40px;
@@ -410,6 +411,7 @@ margin-left: 1px;
   justify-content: center;
   grid-template-columns: repeat(3, minmax(200px, 620px));
   width: 2048px;
+  
 }
 @media ( max-width:1800px){
   .main-card--cointainer11456 {
@@ -479,7 +481,7 @@ display: grid;
   line-height: 19px;
   display: flex;
   align-items: center;
-  text-align: justify;
+  
   letter-spacing: 0.1em;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -500,7 +502,7 @@ display: grid;
   line-height: 19px;
   display: flex;
   align-items: center;
-  text-align: justify;
+  
   letter-spacing: 0.1em;
   padding-top: 15px;
   padding-bottom: 34px;

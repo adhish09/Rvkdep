@@ -29,6 +29,9 @@
   margin-right: 20px;
   cursor: pointer;
 }
+.info-icon:hover , .info-detail:hover{
+  color: rgba(0, 0, 0, 0.607);
+}
 
 @media screen and (min-width: 699px) {
   .info {

@@ -1,9 +1,11 @@
 .section_padding{
-	padding: 2rem 2rem;
+	padding: 14px 2rem 0px 2rem;
 }
+ 
 
 .footer{
-	background-color: #2F2F2F;
+	background-color: #2F2F2F !important;
+	padding-bottom: 30px !important;
 }
 
 .sb_footer{
@@ -35,7 +37,7 @@ img{
 	flex-direction: column;
 	color: white;
 	margin-top: 1px;
-	padding: 40px 0px;
+	padding: 0px 0px;
 
 }
 
@@ -65,8 +67,22 @@ img{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	text-align: center;
+
+	
 }
+.footer-inputs{
+	background-color: transparent !important;
+	border: none !important;
+	outline: none !important;
+	padding-top: 9px !important;
+	padding-left: 0px !important;
+}
+.footer-inputs:focus{
+	background-color: transparent !important;
+	border: none !important;
+	outline: none !important;
+}
+
 
 .sb_footer-links_div{
 	width: 150px;
@@ -85,6 +101,7 @@ hr{
 	border: 1px solid #000000;
 }
 .icon{
+	text-align: center;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -93,6 +110,8 @@ hr{
 .socialmedia{
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+	text-align: center;
 }
 
 .socialmedia p{

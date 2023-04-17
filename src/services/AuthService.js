@@ -1,4 +1,4 @@
-import axios from './apiService';
+import axios from "./apiService";
 
 class AuthService {
   setTokens(data) {
@@ -8,15 +8,12 @@ class AuthService {
 
   async login(email, password) {
     try {
-      const response = await axios.post(
-        `/api/token/`,
-        {
-          email,
-          password,
-        }
-      );
-
-      this.setTokens(response.data);
+      const response = await axios.post(`/api/login/`, {
+        email,
+        password,
+      });
+     
+     await this.setTokens(response.data?.data?.token);
 
       return {
         status: 200,
@@ -35,22 +32,17 @@ class AuthService {
   }
 
   async sign_up(name, phone_number, email, password) {
+    const data = new FormData();
 
-    const data = new FormData()
-
-    data.append("name", name)
-    data.append("phone_number", phone_number)
-    data.append("email", email)
-    data.append("password", password)
+    data.append("name", name);
+    data.append("phone_number", phone_number);
+    data.append("email", email);
+    data.append("password", password);
 
     try {
-      const response = await axios.post(
-        `/api/accounts/`,
-        data
-      );
+      const response = await axios.post(`/api/accounts/`, data);
 
       if (response.status === 201) {
-
         return {
           status: 200,
           message: "user created successfully",
@@ -60,7 +52,7 @@ class AuthService {
     } catch (e) {
       let error = "";
 
-      if (e.status==401){
+      if (e.status === 401) {
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
       }
@@ -88,10 +80,9 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const response = await axios.get(
-        `/api/current_user/`,
-      );
-    return response.data;
+    const response = await axios.get(`/api/profile/`);
+    
+    return response?.data;
   }
 }
 

@@ -1,3 +1,6 @@
+.carousel{
+ padding: 12px 12px;
+}
 .caro{
 }
 .slidecaro{
@@ -11,3 +14,6 @@ width: 100%;}
    height: 20px;
    background-color: transparent;
 }
+.ant-btn{
+  background:transparent!important;
+}  

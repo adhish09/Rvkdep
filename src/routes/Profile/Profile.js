@@ -1,31 +1,43 @@
-import React, { useState, useEffect, useContext } from "react";
-import { NavLink } from "react-router-dom";
-import "./Profile.css";
-import { GoMail } from "react-icons/go";
+import React, { useContext, useEffect, useState } from "react";
 import { AiTwotoneEdit } from "react-icons/ai";
-import main from "./download.png";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "../../services/apiService";
+import "./Profile.css";
 
 function Profile() {
-  const [active_user, setActiveUser] = useState({});
-
+  // const [user, setActiveUser] = useState({});
+  const [event, setEvents] = useState([]);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await axios.get("/api/accounts/" + user?.id + "/");
+  //       console.log(response);
+  //       setActiveUser(response.data);
+  //     } catch (error) {}
+  //   };
 
+  //   fetchUser();
+  // }, [user]);
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("/api/accounts/" + user.id + "/");
-        setActiveUser(response.data);
-        console.log(active_user, "user");
-      } catch (error) {
-        console.error(error);
-      }
+        await axios.get("/api/events").then((res) => {
+          // setEvents(res.data);
+    
+          const filters = res?.data?.filter((item) =>
+            item.user?.some((num) => num === user?.id)
+          );
+          console.log(filters);
+          setEvents(filters);
+        });
+      } catch (error) {}
     };
 
     fetchUser();
-  }, []);
-
+  }, [user]);
   const logout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
@@ -34,12 +46,11 @@ function Profile() {
   };
 
   return (
-    <div className="profile-cont-main">
+    <div className="profile-cont-main"  >
       <section className="main-card--cointainer91158">
         <div className="card-container91158">
           <div className="card91158 ">
             <div className="editbutton">
-
               <NavLink to="editprofile">
                 <button className="edit099">
                   <AiTwotoneEdit size={25} style={{ color: "black" }} />
@@ -47,12 +58,12 @@ function Profile() {
               </NavLink>
             </div>
             <div className="img911589">
-              <img src={user.profile_picture} alt="" />
+              <img src={`https://rvkapidevbymossaddakv16.pythonanywhere.com/${user?.profile_picture}`} alt="" />
               <div className="nameprofile">
-                {active_user.name} , {active_user.age}
+                {user?.name} , {user?.age}
               </div>
               <div className="smartcard">
-                <p>{active_user.email}</p>
+                <p>{user?.email}</p>
               </div>
               <div className="donationprofile">Detail</div>
               <div className="donation_detail">
@@ -62,7 +73,7 @@ function Profile() {
                       <div className="card-body-last9113163">
                         <div className="details3163">
                           <div className="data3163">Name</div>
-                          <div className="data3164">{active_user.name}</div>
+                          <div className="data3164">{user?.name}</div>
                           <div></div>
                         </div>
                       </div>
@@ -74,31 +85,23 @@ function Profile() {
                       <div className="card-body-last9113163">
                         <div className="details3163">
                           <div className="data3163">Age</div>
-                          <div className="data3164">{active_user.age}</div>
+                          <div className="data3164">{user?.age}</div>
                           <div></div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="card-container-last9113163">
-                    <div className="card-last9113163 ">
-                      <div className="card-body-last9113163">
-                        <div className="details3163">
-                          <div className="data3163">DOB</div>
-                          <div className="data3164">{active_user.dob}</div>
-                          <div></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                   
 
                   <div className="card-container-last9113163">
                     <div className="card-last9113163 ">
                       <div className="card-body-last9113163">
                         <div className="details3163">
                           <div className="data3163">Gender</div>
-                          <div className="data3164">{active_user.gender && active_user.gender}</div>
+                          <div className="data3164">
+                            {user?.gender  }
+                          </div>
                           <div></div>
                         </div>
                       </div>
@@ -110,7 +113,7 @@ function Profile() {
                       <div className="card-body-last9113163">
                         <div className="details3163">
                           <div className="data3163">Email</div>
-                          <div className="data3164">{active_user.email}</div>
+                          <div className="data3164">{user?.email}</div>
                           <div></div>
                         </div>
                       </div>
@@ -123,7 +126,7 @@ function Profile() {
                         <div className="details3163">
                           <div className="data3163">Mobile</div>
                           <div className="data3164">
-                            {active_user.phone_number}
+                            {user?.phone_number}
                           </div>
                           <div></div>
                         </div>
@@ -137,7 +140,7 @@ function Profile() {
                         <div className="details3163">
                           <div className="data3163">Smart Card No</div>
                           <div className="data3164">
-                            {active_user.smart_card}
+                            {user?.smart_card}
                           </div>
                           <div></div>
                         </div>
@@ -150,14 +153,16 @@ function Profile() {
                       <div className="card-body-last9113163">
                         <div className="details3163">
                           <div className="data3163">Address</div>
-                          <div className="data3164">{active_user.address}</div>
+                          <div className="data3164">{user?.address}</div>
                           <div></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </section>
-                <button className="bookevent" onClick={logout}>Logout</button>
+                <button className="bookevent" onClick={logout}>
+                  Logout
+                </button>
               </div>
             </div>
           </div>
@@ -173,19 +178,36 @@ function Profile() {
                     <div className="donationhead90">ID</div>
                     <div className="donationhead90">Date</div>
                     <div className="donationhead90">Amount</div>
-                    <div className="donationhead90">Details</div>
                   </div>
 
+                  {user?.Donation?.map((item, i) => (
+                    <div
+                      className="donationdetailheadingmain"
+                      style={{ marginTop: "3px" }}
+                    >
+                      <div className="donationhead90">{item?.id}</div>
+                      <div className="donationhead90">
+                        {new Date(item?.order_date).toLocaleString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </div>
+
+                      <div className="donationhead90">{item?.amount}</div>
+                    </div>
+                  ))}
+
                   <div className="donationscroll">
-                    {active_user.donations &&
-                      active_user.donations.map((donation) => (
+                    {user?.donations &&
+                      user?.donations.map((donation) => (
                         <div className="donationdetailheading">
-                          <div className="donationhead909">{donation.id}</div>
+                          <div className="donationhead909">{donation?.id}</div>
                           <div className="donationhead909">
-                            {donation.created_at}
+                            {donation?.created_at}
                           </div>
                           <div className="donationhead909">
-                            {donation.amount}
+                            {donation?.amount}
                           </div>
                           <div className="donationhead9099">
                             <u>View Receipt</u>
@@ -201,14 +223,33 @@ function Profile() {
                   <div className="donationdetailheadingmain">
                     <div className="donationhead9012">ID</div>
                     <div className="donationhead9013">Date</div>
-                    <div className="donationhead901">Event Name</div>
+
                     <div className="donationhead901">Location</div>
-                    <div className="donationhead9012">Ticket</div>
+                    <div className="donationhead9012">Ticket Price</div>
                   </div>
+                  {event.map((item) => (
+                    <div
+                      className="donationdetailheadingmain"
+                      style={{ marginTop: "3px" }}
+                      key={item.id}
+                    >
+                      <div className="donationhead9012">{item.id}</div>
+                      <div className="donationhead9013">
+                        {new Date(item.created_at).toLocaleString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </div>
+
+                      <div className="donationhead901">{item.location}</div>
+                      <div className="donationhead9012">{item.event_price}</div>
+                    </div>
+                  ))}
 
                   <div className="donationscroll">
-                    {active_user.events &&
-                      active_user.events.map((event) => (
+                    {user?.events &&
+                      user?.events.map((event) => (
                         <div className="donationdetailheading">
                           <div className="donationhead90902">{event.id}</div>
                           <div className="donationhead90903">
@@ -226,7 +267,7 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <button className="bookevent">Book Event</button>
+              <button className="bookevent" onClick={()=>navigate("/eventsall")}>Book Event</button>
             </div>
           </div>
         </div>

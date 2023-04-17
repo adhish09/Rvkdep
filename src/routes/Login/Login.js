@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthContext";
 import { IoCloseOutline } from "react-icons/io5";
 import "./Login.css";
+import { toast } from "react-hot-toast";
 
 
 const formReducer = (state, event) => {
@@ -45,11 +46,14 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitting(true);
-
     try {
       const response = await login(formData.email, formData.password);
+     
       if (response.status === 200) {
-        navigate("/")
+     
+       await navigate("/")
+       toast.success("successfully login")
+       window.location.reload()
       } else {
         setSubmitting(false);
       }
@@ -104,14 +108,16 @@ function Login() {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </div>
-              <div className="ppp">Forgot password ?*</div>
+             
+              <div className="ppp" style={{color:"yellow !important"}}> <Link to="/forgatepassword" style={{color:"yellow !important"}}>Forgot password ?*</Link></div>
+
               <button className="button1" onClick={toggleModall}>
                 Login
               </button>
             </form>
             <div className="body11">
               <p>
-                Don’t have an account? <NavLink to="signup"> <span>Sign up</span></NavLink>
+                Don’t have an account? <NavLink to="/signup"> <span>Sign up</span></NavLink>
               </p>
             </div>
           </div>

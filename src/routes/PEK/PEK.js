@@ -8,13 +8,14 @@ import ReactPlayer from 'react-player';
 import YoutubeEmbed from '../../components/LatestVideo/YoutubeEmbed';
 
 const First = () => {
+  window.scrollTo(0,0)
   const [isPlaying, setIsPlaying] = useState(false);
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
   }
   return (
-    <div className="maincontmargin345">
+    <div className="maincontmargin345"  >
       <div className="card-container_out345">
         <div className="card_out345 ">
           <div className="card-body345">

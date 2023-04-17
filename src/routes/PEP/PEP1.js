@@ -1,37 +1,27 @@
 import React from "react";
 import "./PEP1.css";
-import main from "./main.png";
+import main from "./Map.jpg";
 
 function PEP1() {
   return (
-    <div>
-      <section className="main-card--cointainer910head">
-      <div className="card-container910head">
-      <div className="card910head ">
-        <div className="PEP1head">Peace Education Program</div></div></div>
-      </section>
-      <section className="main-card--cointainer910">
-        <div className="card-container910">
-          <div className="card910 ">
-            <div className="img910">
-              <img src={main} alt="img" />
-            </div>
-          </div>
+    <div className="pep0"> 
+        <div style={{width:"100%"}}>
+        <img src={main} alt="loading ..." style={{width:"100%",height:"100%"}}/>
         </div>
-
-        <div className="card-container910">
-          <div className="card910 ">
-            <div className="img91019">
-              The Peace Education Program (PEP) consists of 10 sessions, each
-              focusing on a particular theme. These customized, interactive
-              workshops are non-religious and non-sectarian. The content of each
-              theme is based on excerpts from Prem Rawat’s international talks.
-              The themes are:Peace, Appreciation, Inner Strength,Self-Awareness,
-              Clarity,Understanding, Dignity ,Choice , Hope, and Contentment.
-            </div>
-          </div>
-        </div>
-      </section>
+       <p className="map-text">
+       The Prem Rawat Foundation (TPRF) provides access to the course
+              materials to organizations and volunteers free of charge, making
+              the Peace Education Program readily available to diverse
+              populations in more than 80 countries and in 40 languages.
+            
+       </p>
+       <p className="map-text2">
+       Each workshop features video excerpts of renowned author Prem
+                Rawat’s inspiring presentations on one of ten themes: Peace,
+                Appreciation, Inner Strength, Self-awareness, Clarity,
+                Understanding, Dignity, Choice, Hope, and Contentment.
+              
+       </p>
     </div>
   );
 }

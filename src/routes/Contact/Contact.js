@@ -14,7 +14,7 @@ const location = {
 } // our location object from earlier
 
 const App = () => (
-  <div className="App">
+  <div className="App" >
     <IntroSection />
     <ContactSection />
     <MapSection location={location} zoomLevel={17} /> {/* include it here */}

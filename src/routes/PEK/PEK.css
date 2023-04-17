@@ -169,7 +169,7 @@ margin-left: -120px;
     line-height: 35px;
     display: flex;
     align-items: center;
-    text-align: justify;
+    
     letter-spacing: 0.1em;
   }
 
@@ -179,13 +179,13 @@ margin-left: -120px;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 35px;
+    line-height: 26px;
     word-spacing: 0.8px;
     display: flex;
     align-items: center;
-    text-align: justify;
+    
     letter-spacing: 0.1em;
-    color: black;
+    color: #4a4a4a;
   }
   @media (max-width: 1800px) {
 
@@ -340,12 +340,16 @@ font-size: 20px;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 35px;
+    line-height: 26px;
     word-spacing: 0.8px;
     display: flex;
     align-items: center;
-    text-align: justify;
+    
     letter-spacing: 0.1rem;
+
+  }
+  .img4345 p{
+    line-height: 26px;
   }
   .img4345 a{
     color: #DA9532;
@@ -392,7 +396,7 @@ padding-bottom: 20px;
     font-weight: 400;
     font-size: 16px;
     line-height: 40px;
-    text-align: justify;
+    
     letter-spacing: 0.1em;
   }
   .last345 span{

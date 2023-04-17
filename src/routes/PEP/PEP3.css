@@ -1,4 +1,24 @@
-.main-card--cointainer91012 {
+.pep3-header{
+  margin-top:30px;
+  padding: 24px 0px;
+  background-color: white;
+}
+.pep3-text{
+  padding-left: 32px;
+}
+
+@media (max-width:575px) {
+  .pep3-order1{
+    order:2;
+  }
+  .pep3-order2{
+    order:1;
+  }
+  
+}
+
+
+/* .main-card--cointainer91012 {
     display: grid;
     grid-template-columns: repeat(2, minmax(250px, 1024px));
 grid-gap: 20px;
@@ -88,14 +108,15 @@ padding: 10px;
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
-line-height: 35px;
+line-height: 26px;
 word-spacing: 0.8px;
 display: flex;
 align-items: center;
 text-align: justify;
 letter-spacing: 0.1em;
-color: #000000;
 
+color: #4a4a4a;
+text-align: left;
   }
   @media (max-width: 700px) {
     .img910112 {
@@ -104,4 +125,4 @@ color: #000000;
       margin-top: -20px;
       padding-left: 20px;
       padding-right: 20px;
-    }}
+    }} */

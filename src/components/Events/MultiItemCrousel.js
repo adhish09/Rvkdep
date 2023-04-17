@@ -9,31 +9,29 @@ import { GoLocation } from "react-icons/go";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
+import {useTranslation } from 'react-i18next';
 import axios from '../../services/apiService';
 
 // utility functions
-const getTime = (date)=>{
-
-  const dateObj = new Date(date);
-  const timeString = dateObj.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
-
-  return timeString
-
+function formatDateTime(dateTimeString) {
+  const myDateTime = new Date(dateTimeString);
+  const formattedDateTime = myDateTime.toLocaleString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'UTC'
+  }).replace(/(\d+)\/(\d+)\/(\d+)/, "$2-$1-$3"); // replace slashes with hyphens
+  return formattedDateTime;
 }
 
-const getDate=(date)=>{
-  const dateObj = new Date(date);
-  const options = { month: 'long', year: 'numeric' };
-  const dateString = dateObj.toLocaleString('en-US', options);
-
-  return dateString;
-
-}
 
 
 let slidesToShow = 5;
 const PreviousBtn = (props) => {
-  console.log(props);
+ 
   const { className, onClick, currentSlide } = props;
   return (
     <>
@@ -62,19 +60,14 @@ const NextBtn = (props) => {
 const carouselProperties = {
   prevArrow: <PreviousBtn />,
   nextArrow: <NextBtn />,
-    slidesToShow: 5,
-  slidesToScroll: 1,
-  infinite: false,
-  appendDots: (dots) => (
-    <div style={{ backgroundColor: 'transparent' }}>
-      <ul style={{ margin: "0px", color: "#DA9532" }}> {dots} </ul>
-    </div>
-  ),
+  slidesToShow: 4,
+  slidesToScroll: 1,  
 
+  infinite: false,
   // slidesToScroll={3}
   responsive: [
     {
-      breakpoint: 576,
+      breakpoint: 746,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -83,7 +76,7 @@ const carouselProperties = {
       },
     },
     {
-      breakpoint: 869,
+      breakpoint: 900,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
@@ -92,18 +85,9 @@ const carouselProperties = {
       },
     },
     {
-      breakpoint: 1300,
+      breakpoint: 1400,
       settings: {
         slidesToShow: 3,
-        slidesToScroll: 1,
-
-        centerMode: false,
-      },
-    },
-    {
-      breakpoint: 1900,
-      settings: {
-        slidesToShow: 4,
         slidesToScroll: 1,
 
         centerMode: false,
@@ -112,34 +96,52 @@ const carouselProperties = {
   ],
 };
 const MultiItemCarousel2 = () => {
-  const [width, setWidth] = useState(window.innerWidth);
+  
   const [events, setEvents] = useState([]);
-
-  const updateWidth = () => {
-    setWidth(window.innerWidth);
-  };
-
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get('/api/events/');
-        setEvents(response.data.results);
+
+        const filter = response.data.filter(item => item.is_event_complete !== true)
+        setEvents(filter);
       } catch (error) {
-        console.error(error);
+        
       }
     };
 
     fetchEvents();
   }, []);
+  const [width, setWidth] = useState(window.innerWidth);
+  
+
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  if (width <= 426) {
+    slidesToShow = 1;
+  } else if (width > 426 && width <= 769) {
+    slidesToShow = 3;
+  } else if (width > 769 && width <= 1025) {
+    slidesToShow = 4;
+  } else {
+    slidesToShow = 4;
+  }
 
   return (
     <div style={{ margin: "20px" }} className="carousel">
       <div className="headings">
-        <div className="h2">Events</div>
-        <div className="h3">
-          Get complete information on exciting events from RVK
-        </div>
+        <div className="h2">{t('Events')}</div>
       </div>
       <Slider {...carouselProperties}>
         {events.map((item) => (
@@ -152,34 +154,39 @@ const MultiItemCarousel2 = () => {
 
 const Card = ({ item }) => {
   return (
-    <div style={{ textAlign: "center", padding: "0px", margin: "20px" }}>
-    <NavLink  to={`/event/${item.id}/details`}>
-    <div className="eve">
-        <img
-          className="multi__image001"
-          src={item.event_image}
-          alt=""
-          style={{
-            width: "100%",
-            height: "340px",
-            marginBottom: "10px",
-          }}
-        />
-        <div className="cardd">
-          <div className="c2">
-            <div className="r1">
-              <GoLocation style={{ color: "orange" }} /> {item.location}
+    <div style={{ width: "100%", textAlign: "center", padding: "0px", margin: "0 auto" }}>
+      <NavLink to={`/event/${item.id}/details`}>
+        <div className="eve"  >
+          <img
+            className="multi__image001"
+            src={item.event_image}
+            alt=""
+            style={{
+              width: "100%",
+              height: "340px",
+              marginBottom: "10px",
+            }}
+          />
+          <div className="cardd"  >
+            <h3 style={{ textAlign: 'left', marginLeft: "15px", paddingTop: "0px", fontSize: '18px', marginBottom: '0px' }}>
+              {item.event_name
+              }</h3>
+            <div className="c2" style={{padding:"0px",margin:"0px" }} >
+              <div className="r1">
+                <GoLocation style={{ color: "orange" }} />
+                <div>   {item.location}</div>
+              </div>
+              <div className="r2">
+                <AiOutlineClockCircle size={13} style={{ color: "orange" }} />
+                <div> {formatDateTime(item.start)} </div>
+              </div>
             </div>
-            <div className="r2">
-              <AiOutlineClockCircle size={13} style={{ color: "orange" }} />
-              {getTime(item.start)} to {getTime(item.end)}
-            </div>
-          </div>
-          <div className="name">  {item.name} </div>
-          <div className="join">Join with us <BsArrowRight size={16}/> </div>
+            <div className="name">  {item.name} </div>
+            <div className="join"  >
+              <div  >Book now</div> <BsArrowRight size={16} /> </div>
 
           </div>
-      </div></NavLink>
+        </div></NavLink>
     </div>
   );
 };

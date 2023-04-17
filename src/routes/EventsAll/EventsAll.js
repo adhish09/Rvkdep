@@ -45,13 +45,11 @@ const getDate = (date) => {
 };
 
 function Events() {
+  window.scrollTo(0,0)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [events, setEvents] = useState({
-    upcoming_events: [],
-    old_events: [],
-  });
+  const [events, setEvents] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -61,10 +59,13 @@ function Events() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("/api/events/all_events/");
-        setEvents(response.data);
+        const response = await axios.get("/api/events/");
+        
+        const filter = response.data.filter(item=>item.is_event_complete===true)
+       
+        setEvents(filter);
       } catch (error) {
-        console.error(error);
+       
       }
     };
 
@@ -72,20 +73,16 @@ function Events() {
   }, []);
 
   return (
-    <div>
+    <div  >
       {" "}
       <Div>
         <Image src={Galleryrvk} />
       </Div>
       <div className="eventsallhead">
-
-
-
-
-<MultiItemCarousel2/></div>
+        <MultiItemCarousel2/></div>
       <div className="latest">
         <div className="break"></div>
-        <MultiItemCarousel old_events={events.old_events} />
+        <MultiItemCarousel  events={events } />
       </div>
     </div>
   );

@@ -44,8 +44,12 @@
   justify-self: end;
   font-size: 5rem;
   color:#da9532;
+  overflow: hidden !important;
 }
-
+.form-submit:hover .form-submits{
+  justify-self: end;
+  color:#0000003c;
+}
 @media screen and (min-width: 799px) {
   .form {
     display: grid;

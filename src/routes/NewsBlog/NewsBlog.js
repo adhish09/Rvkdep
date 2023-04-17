@@ -1,63 +1,47 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "../../services/apiService";
 import "./NewsBlog.css";
 
 export default function NewsBlog() {
+  window.scrollTo(0, 0);
+  const { id } = useParams();
+  const [news, setNews] = useState("");
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get(`/api/news/${id}`);
+        setNews(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchNews();
+  }, [id]);
+  console.log(news);
   return (
-    <div className="singlePost">
+    <div className="singlePost" style={{ paddingTop: "114px" }}>
       <div className="singlePostWrapper">
-        <img
-          className="singlePostImg"
-          src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          alt=""
-        />
+        <img className="singlePostImg" src={news?.image} alt="No Ima" />
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor
+          {news?.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon far fa-edit"></i>
             <i className="singlePostIcon far fa-trash-alt"></i>
           </div>
         </h1>
         <div className="singlePostInfo">
-          <span>
-            Author:
-            <b className="singlePostAuthor">
-              <Link className="link" to="/posts?username=Safak">
-                abc
-              </Link>
-            </b>
-          </span>
+          <span>Author: {news?.author}</span>
           <span>1 day ago</span>
         </div>
-        <p className="singlePostDesc">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-          quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-          Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-          eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-          error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-          impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-          odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos!
-          <br />
-          <br />
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-          quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-          Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-          eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-          error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-          impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-          odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
-        </p>
+        <p className="singlePostDesc">{news?.details}</p>
+        <div style={{ textAlign: "center" }}>
+          <b className="singlePostAuthor">
+            <a href={news?.news_document} target="_blank" rel="noreferrer">
+              Download Pdf
+            </a>
+          </b>
+        </div>
       </div>
     </div>
   );

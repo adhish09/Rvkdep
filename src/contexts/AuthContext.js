@@ -5,8 +5,9 @@ import axios from "axios";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  const [donate,setDonate] = useState();
   const [user, setUser] = useState(null);
-
+  const [resetApi,setResetApi] = useState({})
   async function login(email, password) {
     const data = await AuthService.login(email, password);
     return data;
@@ -28,9 +29,10 @@ export const AuthContextProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         const user = await AuthService.getCurrentUser();
+        console.log(user);
         setUser(user);
       } catch (error) {
-        console.error(error);
+        localStorage.removeItem("access_token")
       }
     };
 
@@ -63,7 +65,7 @@ export const AuthContextProvider = ({ children }) => {
  
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, authAxios, sign_up }}>
+    <AuthContext.Provider value={{ user, login, logout, authAxios, sign_up,donate,setDonate,resetApi,setResetApi }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Donation.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
@@ -7,18 +7,39 @@ import { MdArrowForward } from "react-icons/md";
 import { CgMailForward } from "react-icons/cg";
 import { FiUnlock } from "react-icons/fi";
 import { IoReturnUpForwardOutline } from "react-icons/io5";
-import axios  from "axios";
-
+ 
+import Detail from "./Detail";
+import { AuthContext } from "../../contexts/AuthContext";
+import styled from "styled-components";
+const Button = styled.button`
+  padding: 7px 15px;
+  margin-top: 24px;
+  margin-bottom:35px;
+  margin-left: 10%;
+  background-color: #da9532;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background-color: orange;
+  }
+  width: 75%;
+  height: 50px;
+  border-radius: 25px;
+`;
 const Donation = () => {
-  const [buttonClicked, setButtonClicked] = useState(false);
 
+  const [buttonClicked, setButtonClicked] = useState(false);
+ const {setDonate} =  useContext(AuthContext)
   const handleClick = () => {
     setButtonClicked(!buttonClicked);
   };
 
   const buttonStyle1 = {
     background: "linear-gradient(95.09deg, rgba(226, 148, 36, 0.83) 0%, rgba(106, 241, 209, 0.61) 100%)",
-    padding: "10px",
+    padding: "10px",  
+    
   };
 
   const buttonStyle2 = {
@@ -52,24 +73,19 @@ const Donation = () => {
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
+    console.log('this isname');
+    // value(event.target.value)
     setInputValue(event.target.value);
   };
 
 
 
   function handleSubmit(event) {
-    // Submit form data to server
-     axios.post('/api/donations/', {amount:inputValue})
-    .then((response) => {
-      alert("You have successfully Donated")
-    })
-    .catch((error) => {
-     alert(error)
-    });
+     setDonate(inputValue)
   }
 
   return (
-    <div className="newss313">
+    <div className="newss313" >
       <div className="card-container_out91131">
         <div className="card_out91131 ">
           <div className="card-body91131">
@@ -143,7 +159,7 @@ const Donation = () => {
                 <div className="submitamt">
                   {inputValue ? (
                     <button className="submitamt" type="submit" onClick={handleSubmit}>
-                      <NavLink to="/detail" className="submitamt">Donate Now</NavLink>
+                      <NavLink to="/detail"   className="submitamt">Donate Now</NavLink>
                     </button>
                   ) : (
                     <button className="submitamt01" type="submit" disabled>

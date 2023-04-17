@@ -1,16 +1,17 @@
 import React from "react";
 import "./PEP3.css";
 import main from "./P2.png";
+import { Col, Row } from "antd";
 
 function PEP3() {
   return (
-    <div>
-      <section className="main-card--cointainer91012">
-        <div className="card-container91012">
-          <div className="card91012 ">
 
-          <div className="img910112">
-              There are currently 3 stand-alone programs, and you can choose
+    <div className='pep3-header'  >
+    <Row gutter={[14, 14]}  >
+       
+        <Col  sm={12} xs={24}  className="pep3-order1"> 
+        <p className='pep3 pep3-text'>
+        There are currently 3 stand-alone programs, and you can choose
               which course to start with. They are not sequential. Here are the
               unique aspects of each program: PEP 1: Each DVD / session is 1
               hour in length. It includes short and longer videos and five
@@ -23,20 +24,17 @@ function PEP3() {
               the ill, elderly, and those in a rehabilitation center. There are
               two designated reflection times per session. PEP 2 also includes
               some media interviews with Prem Rawat.
+        </p>
+        </Col>
+           <Col  sm={12} xs={24} className="pep3-order2" >
+            <div className='pep1'  >
+          
+            <img src={main} alt="loading ..." style={{zIndex:" ",width:"100%",height:"60%"}}/>
+             
             </div>
-
-          </div>
-        </div>
-
-        <div className="card-container910122">
-          <div className="card91012 ">
-          <div className="img91012">
-          <img src={main} alt="img" />
-        </div>
-          </div>
-        </div>
-      </section>
-    </div>
+             </Col>
+    </Row>
+</div>
   );
 }
 

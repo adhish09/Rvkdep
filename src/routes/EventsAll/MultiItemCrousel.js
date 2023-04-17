@@ -34,7 +34,7 @@ const getDate=(date)=>{
 
 let slidesToShow = 5;
 const PreviousBtn = (props) => {
-  console.log(props);
+  
   const { className, onClick, currentSlide } = props;
   return (
     <>
@@ -69,7 +69,7 @@ const carouselProperties = {
   // slidesToScroll={3}
   responsive: [
     {
-      breakpoint: 576,
+      breakpoint: 746,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -78,7 +78,7 @@ const carouselProperties = {
       },
     },
     {
-      breakpoint: 869,
+      breakpoint: 900,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
@@ -87,7 +87,7 @@ const carouselProperties = {
       },
     },
     {
-      breakpoint: 1300,
+      breakpoint: 1400,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -97,7 +97,8 @@ const carouselProperties = {
     },
   ],
 };
-const MultiItemCarousel = ({old_events}) => {
+const MultiItemCarousel = ({ events}) => {
+ 
   const [width, setWidth] = useState(window.innerWidth);
   
 
@@ -126,12 +127,10 @@ const MultiItemCarousel = ({old_events}) => {
     <div style={{ margin: "20px" }} className="carousel">
       <div className="headings">
         <div className="h2">Check our Old events</div>
-        <div className="h3">
-        Aarambh Series - 2022
-        </div>
+        
       </div>
       <Slider {...carouselProperties}>
-        {old_events.map((item) => (
+        { events.map((item) => (
           <Card item={item} />
         ))}
       </Slider>
@@ -140,7 +139,7 @@ const MultiItemCarousel = ({old_events}) => {
 };
 
 const Card = ({ item }) => {
-
+ 
 
   return (
     <div style={{ textAlign: "center", padding: "0px", margin: "20px" }}>
@@ -156,6 +155,8 @@ const Card = ({ item }) => {
           }}
         />
         <div className="cardd">
+        <h3 style={{textAlign:'left',marginLeft:"15px",paddingTop:"5px"}}>{item.event_name
+          }</h3>
           <div className="c2">
             <div className="r1">
               <GoLocation style={{ color: "orange" }} />{item.location}

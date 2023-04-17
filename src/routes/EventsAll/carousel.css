@@ -47,7 +47,7 @@
   line-height: 33px;
   display: flex;
   align-items: center;
-  text-align: justify;
+  
   letter-spacing: 0.1em;
 
   color: #000000;
@@ -89,7 +89,7 @@ padding-top: 10px;
   }
   .h3{
     font-size: 18px;
-    text-align: justify;
+    
     padding-bottom: 20px;
 
   }

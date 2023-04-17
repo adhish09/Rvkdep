@@ -7,29 +7,13 @@ import { ArrowBackIos, ArrowForwardIos } from '@material-ui/icons';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import ModalSlider from './ModalSlider';
 
-const Menu = [
-
-
-  {
-    id: 1,
-    image: "../Radio/AIR-Guwhati.jpg",
-    name: "AIR-Guwhati",
-  },
-
-  {
-    id: 2,
-    image: "../Radio/Radio-Pune.jpg",
-    name: "Radio-Pune",
-  },
-
-
-];
-
+ 
 
 let slidesToShow = 5;
 const PreviousBtn = (props) => {
-  console.log(props);
+ 
   const { className, onClick, currentSlide } = props;
   return (
     <>
@@ -43,7 +27,7 @@ const PreviousBtn = (props) => {
 };
 const NextBtn = (props) => {
   const { className, onClick, slideCount, currentSlide } = props;
-  console.log(props);
+ 
   return (
     <>
       {currentSlide !== slideCount - slidesToShow && (
@@ -70,66 +54,87 @@ const carouselProperties = {
   // slidesToScroll={3}
   responsive: [
     {
-      breakpoint: 576,
-      settings: {
-
-        slidesToShow: 1,
-        centerMode: false,
-      },
+      breakpoint:  600 ,
+    settings: {
+      slidesToShow: 1,
+      infinite: true,
     },
-    {
-      breakpoint: 869,
-      settings: {
-        slidesToShow: 2,
-        centerMode: false,
-      },
-    },
-    {
-      breakpoint: 1300,
-      settings: {
-        slidesToShow: 3,
-        centerMode: false,
-      },
-    },
-    {
-      breakpoint: 1700,
-      settings: {
-        slidesToShow: 4,
-        centerMode: false,
-      },
-    },
-
-
+  },
+  {
+    breakpoint:  850 ,
+  settings: {
+    slidesToShow: 2,
+    centerMode: false,
+    infinite: false,
+  },
+},
+{
+  breakpoint:  1024 ,
+settings: {
+  slidesToShow: 3,
+  centerMode: false,
+  infinite: false,
+},
+},
+  {
+    breakpoint:  1920 ,
+  settings: {
+    slidesToShow: 4,
+    centerMode: false,
+    infinite: false,
+  },
+}
   ],
 };
 
-const MultiItemCarousel04 = () => {
+const MultiItemCarousel04 = (props) => {
   const [width, setWidth] = useState(window.innerWidth);
   const updateWidth = () => {
     setWidth(window.innerWidth);
   };
+  const [visible, setVisible] = useState(false);
+    
+  const [value,setValue] = useState(null);
+  const handleModal = (data)=>{
+   
+       setValue(data)
+       setVisible(true);
+    
+  }
+  
+  const handleOk = () => {
+    setVisible(false);
+  };
 
+  const handleCancel = () => {
+    setVisible(false);
+  };
+  const menu = props.g.filter(item=>item.category===4);
   return (
     <div className="carousel">
         <Slider {...carouselProperties}>
-          {Menu.map((curElem) => {
-            const { id, image, name, place } = curElem;
+          {menu.map((curElem) => {
+            const { id, image, title, place } = curElem;
 
             return (
-              <>
-              <div className = "main5769" style={{ textAlign: 'center',marginLeft: "20px" }}>
-              <NavLink to = ""><img
-                className='multi__image784'
-                src={image}
-                alt=''
-              /></NavLink>
-              <p className="gallerycont"><h3>{name}</h3></p>
-              <br/>
-            </div>
-              </>
+              <div style={{width:"100%" , margin:"0 auto"}}>
+              <div onClick={()=>handleModal(image)}>
+                <div className="main5769" style={{ textAlign: 'center', marginLeft: "20px" }}>
+                  <NavLink to=""><img
+                    className='multi__image784'
+                    src={image}
+                    alt=''
+                  /></NavLink>
+                   
+                </div>
+                <p className="gallerycont"><h3>{title}</h3></p>
+                
+              </div>
+              </div>
             );
           })}
         </Slider>
+        <ModalSlider value={value} handleCancel={handleCancel} visible={visible}/>
     </div>
   );
 };

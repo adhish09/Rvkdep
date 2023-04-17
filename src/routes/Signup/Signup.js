@@ -4,6 +4,7 @@ import "./Signup.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthContext";
 import { IoCloseOutline } from "react-icons/io5";
+import { toast } from "react-hot-toast";
 
 const formReducer = (state, event) => {
   if (event.reset) {
@@ -66,11 +67,13 @@ function Login() {
         formData.password
       );
       if (response.status === 200) {
-        navigate("/login");
+        toast.success("check email to verification")
+        navigate("/otp");
       } else {
         setSubmitting(false);
       }
     } catch (error) {
+      toast.error(error.data)
       setSubmitting(false);
     }
   };
@@ -101,6 +104,7 @@ function Login() {
                 placeholder="Enter Name here"
                 name="name"
                 onChange={handleChange}
+                required
               />
               <div className="pp01">Mobile Number*</div>
               <input
@@ -108,6 +112,7 @@ function Login() {
                 placeholder="Enter Phone Number"
                 name="phone_number"
                 onChange={handleChange}
+                required
               />
               <div className="pp">Email</div>
               <input
@@ -132,11 +137,11 @@ function Login() {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </div>
-              <button className="button101" onClick={toggleModall}>
+              <button className="button101" onClick={toggleModall}  >
                 SignUp
               </button>
               <div className="terms">
-                <p>
+                <p style={{paddingTop:"3px"}}>
                   By sign up you are agree to RVK
                   <br />
                   <span>Terms of use</span> and <span>Privacy policies</span>
@@ -145,7 +150,7 @@ function Login() {
             </form>
             <div className="body1101">
               <p>
-                Already have an account? <NavLink to = "login"><span>Sign in</span></NavLink>
+                Already have an account? <NavLink to = "/login"><span>Sign in</span></NavLink>
               </p>
             </div>
           </div>

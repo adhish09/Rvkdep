@@ -2,53 +2,53 @@ import React, {useContext, useEffect,  useState} from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from '../../services/apiService';
+import { ClassSharp } from "@material-ui/icons";
+import { toast } from "react-hot-toast";
 
 
 const EditProfile = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const [active_user, setActiveUser] = useState({})
-
-
-
   const [selectedFile, setSelectedFile] = useState(null);
-
+   const [activeUser,setActiveUser] = useState();
   const [state, setState] = useState({});
 
-  const handleChange = (event) => {
-    setState((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get('/api/accounts/'+user.id+"/");
-        setActiveUser(response.data);
-
-        const initialState = {
-          name:response.data.name,
-          age:response.data.age,
-          dob:response.data.dob,
-          email:response.data.email,
-          phone_number:response.data.phone_number,
-          address:response.data.address,
-          gender:response.data.gender
-        }
+   
+  const [users,setUsers] = useState({});
+  useEffect(()=>{
+    setUsers(user)
+  },[])
+  const handleName = e =>{
+    const u = {name:e.target.value,age:users?.age,smart_card:users?.smart_card,email:users?.email,phone_number:users?.phone_number,address:users?.address,gender:users?.gender};
+    setUsers(u)
+  }
+  const handleAge = e =>{
+    const u = {name:users?.name,age:e.target.value,smart_card:users?.smart_card,email:users?.email,phone_number:users?.phone_number,address:users?.address,gender:users?.gender};
+    setUsers(u)
+  }
+  const handleSmart = e =>{
+    const u = {name:users?.name,age:users?.age,smart_card:e.target.value,email:users?.email,phone_number:users?.phone_number,address:users?.address,gender:users?.gender};
+    setUsers(u)
+  }
+ 
+  const handleEmail = e =>{
+    const u = {name:users.name,age:users?.age,smart_card:users?.smart_card,email:e.target.value,phone_number:users?.phone_number,address:users?.address,gender:users?.gender};
+    setUsers(u)
+  }
+  const handlePhone = e =>{
+    const u = {name:users.name,age:users?.age,smart_card:users?.smart_card,email:users?.email,phone_number:e.target.value,address:users?.address,gender:users?.gender};
+    setUsers(u)
+  }
+  const handleAddress = e =>{
+    const u = {name:users.name,age:users?.age,smart_card:users?.smart_card,email:users?.email,phone_number:users?.phone_number,address:e.target.value,gender:users?.gender};
+    setUsers(u)
+  }
+  const handleGender = e =>{
+    const u = {name:users.name,age:users?.age,smart_card:users?.smart_card,email:users?.email,phone_number:users?.phone_number,address:users?.address,gender:e.target.value};
+    setUsers(u)
+  }
     
-        setState(initialState);
-
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUser();
-
-  }, []);
+  
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -59,13 +59,13 @@ const EditProfile = () => {
     event.preventDefault();
     const data = new FormData()
 
-    data.append("name", state.name)
-    data.append("age", state.age)
-    data.append("dob", state.dob)
-    data.append("email", state.email)
-    data.append("phone_number", state.phone_number)
-    data.append("address", state.address)
-    data.append("gender", state.gender)
+    data.append("name", users.name)
+    data.append("age", users?.age)
+    data.append("smart_card", users.smart_card)
+    data.append("email", users.email)
+    data.append("phone_number", users.phone_number)
+    data.append("address", users.address)
+    data.append("gender", users.gender)
 
     if (selectedFile){
       data.append("profile_picture", selectedFile)
@@ -73,12 +73,14 @@ const EditProfile = () => {
  
 
     // Submit form data to server
-     axios.patch('/api/accounts/'+user.id+"/", data)
+     axios.patch('/api/profile/', data)
     .then((response) => {
-      alert("You have successfully updated your account")
+      toast.success("You have successfully updated your account");
+       navigate("/profile")
+       window.location.reload()
     })
     .catch((error) => {
-     alert(error)
+       toast.error('can not update profile')
     });
   }
 
@@ -103,10 +105,12 @@ const EditProfile = () => {
                       <input
                         type="text"
                         name="name"
-                        value={state.name}
-                        onChange={handleChange}
+                        onChange={handleName}
+                        value={users?.name||""}
+                      
                         className="datainp"
                         placeholder="Enter Name"
+                        // defaultValue={user?.name}
                       />{" "}
                       <div className="thin-line02"></div>
 
@@ -125,10 +129,11 @@ const EditProfile = () => {
                       <input
                         type="number"
                         name="age"
-                        value={state.age}
-                        onChange={handleChange}
+                        value={users?.age|| ""}
+                        onChange={handleAge}
                         className="datainp"
                         placeholder="Enter Your Age"
+                        defaultValue={user?.age}
                       />{" "}
                       <div className="thin-line02"></div>
 
@@ -143,14 +148,16 @@ const EditProfile = () => {
               <div className="card-last91131 ">
                 <div className="card-body-last91131">
                   <div className="details31">
-                    <div className="data31"> DOB</div>
+                    <div className="data31"> Smart Card</div>
                     <div>
                       <input
-                        type="date"
-                        name="dob"
-                        onChange={handleChange}
+                        type="text"
+                        name="smart_card"
+                        onChange={handleSmart}
                         className="datainp"
-                        placeholder="DD/MM/YYYY"
+                        placeholder="Smart card number"
+                        value={users?.smart_card||""}
+                        
                       />{" "}
                       <div className="thin-line02"></div>
 
@@ -167,12 +174,13 @@ const EditProfile = () => {
                     <div className="data31"> Email</div>
                     <div>
                       <input
-                        type="text"
+                        type="email"
                         name="email"
-                        value={state.email}
-                        onChange={handleChange}
+                        value={users?.email}
+                        // onChange={handleChange}
                         placeholder="Enter Email here"
                         className="datainp"
+                        readOnly
                       />{" "}
                       <div className="thin-line02"></div>
 
@@ -191,10 +199,11 @@ const EditProfile = () => {
                       <input
                         type="number"
                         name="phone_number"
-                        value={state.phone_number}
-                        onChange={handleChange}
+                        value={users?.phone_number|| ""}
+                        onChange={handlePhone}
                         placeholder="Enter Phone number"
                         className="datainp"
+                       
                       />{" "}
                       <div className="thin-line02"></div>
 
@@ -213,10 +222,11 @@ const EditProfile = () => {
                       <input
                         type="text"
                         name="address"
-                        value={state.address}
-                        onChange={handleChange}
+                        value={users?.address|| ""}
+                        onChange={handleAddress}
                         placeholder="Enter address"
                         className="datainp"
+                     
                       />{" "}
                       <div className="thin-line02"></div>
 
@@ -237,9 +247,10 @@ const EditProfile = () => {
                     <select
                       className="dropdownselect"
                       name="gender"
-                      value={state.gender}
-                      onChange={handleChange}
+                      // value={users?.gender||""}
+                      onChange={handleGender}
                     >
+                       <option value="">Gender</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>

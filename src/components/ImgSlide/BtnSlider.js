@@ -5,7 +5,7 @@ import rightArrow from "./icons/right.png";
 import leftArrow1 from "./icons/leftmm.png";
 import rightArrow1 from "./icons/rightmm.png";
 export default function BtnSlider({ direction, moveSlide }) {
-  console.log(direction, moveSlide);
+  
   const [hovered, setHovered] = useState(false);
   return (
     <button

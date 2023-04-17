@@ -5,6 +5,7 @@ import { CgMailForward } from "react-icons/cg";
 import React, { useEffect, useState } from "react";
 
 const Humanitarian = () => {
+  window.scrollTo(0, 0)
   return (
     <div className="maincontmargin321">
       <div className="">
@@ -46,7 +47,7 @@ const Humanitarian = () => {
                   recover from emergencies.
                   <br />
                   <br />
-                   RVK has been actively supporting humanitarian efforts
+                  RVK has been actively supporting humanitarian efforts
                   since its establishment and has awarded numerous grants to
                   partner organizations in 40 countries, contributing millions
                   of dollars towards various initiatives. These initiatives
@@ -80,15 +81,15 @@ const Humanitarian = () => {
               </div>
               <div className="main-card--cointainer321">
                 <div className="img01321">
-                  <img src={img1} alt="" />
+                  <img src={img1} alt="" width="100%" height="100%" />
                 </div>
-                <div className="rtext321">
+                <div className="rtext321" style={{ wordSpacing: "0.8px" }}>
                   Raj Vidya Kender (RVK) is committed to improving the lives of
                   people in need by providing medical care, and other resources
                   to help them recover from emergencies.{" "}
                 </div>
               </div>
-              <div className="ctext321">
+              <div className="ctext321" style={{ wordSpacing: "0.8px" }}>
                 Raj Vidya Kender's Eye Camp initiative is a program dedicated to
                 providing modern eye care services to marginalized communities
                 in India. The initiative aims to raise awareness about eye
@@ -108,12 +109,12 @@ const Humanitarian = () => {
               </div>
               <div className="main-card--cointainer321">
                 <div className="img01321">
-                  <img src={img1} alt="" />
+                  <img src={img1} alt="" width="100%" height="100%" style={{ width: "100% !important" }} />
                 </div>
-                <div className="rtext321">
+                <div className="rtext321" style={{ wordSpacing: "0.8px" }}>
                   Raj Vidya Kender's COVID Relief Camp is a program designed to
                   provide critical aid to communities impacted by the COVID-19
-                  pandemic in India from past 2020.{" "}
+                  pandemic in India from past 2020.
                 </div>
               </div>
               <div className="ctext1321">

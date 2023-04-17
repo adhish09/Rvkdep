@@ -7,7 +7,7 @@ import './contact-section.css'
 
 const ContactSection = () => (
   <>
-    <div className="contact-section">
+    <div className="contact-section"  >
       <Form />
       <Info />
     </div>

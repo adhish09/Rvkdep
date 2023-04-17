@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import CountUp from 'react-countup';
 import "./Navbar01.css";
 import ScrollTrigger from 'react-scroll-trigger';
+import { Link } from "react-router-dom";
 function Home() {
   const [counterOn, setCounterOn] = useState(false);
   const [click, setClick] = useState(false);
@@ -23,15 +24,15 @@ function Home() {
         <Slider />
       </div>
       {isMobile ? null : (
-        <div className="live">
+        <div className="live"  >
           <div className="livedata">
             <div className="phase1">
               <p className="m">
-              <ScrollTrigger style={{marginBottom:'-15px'}} onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
-              <div>
-              {counterOn && <CountUp start={0} end={50} duration={2} delay={0}/>}M+
-              </div>
-              </ScrollTrigger>                <br />
+                <ScrollTrigger style={{ marginBottom: '-15px' }} onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
+                  <div>
+                    {counterOn && <CountUp start={0} end={50} duration={2} delay={0} />}M+
+                  </div>
+                </ScrollTrigger>                <br />
                 <div className="lined"></div>
               </p>
               <p className="mtext">People benefitted from this message</p>
@@ -39,11 +40,11 @@ function Home() {
             <div className="phase2">
               <div className="phase2text">
                 <p className="m">
-                <ScrollTrigger style={{marginBottom:'-15px'}} onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
-                <div>
-                {counterOn && <CountUp start={0} end={80} duration={4} delay={0}/>}K+
-                </div>
-                </ScrollTrigger>                   <br />
+                  <ScrollTrigger style={{ marginBottom: '-15px' }} onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
+                    <div>
+                      {counterOn && <CountUp start={0} end={80} duration={4} delay={0} />}K+
+                    </div>
+                  </ScrollTrigger>                   <br />
                   <div className="lined"></div>
                 </p>
                 <p className="mtext">Visitor count</p>
@@ -51,14 +52,16 @@ function Home() {
             </div>
             <div className="phase3">
               <div className="arrowclass">
-                <div className="arrowclass1">Know More </div>
-                <div className="arrowclass2">
-                  <BsArrowRight
-                    size={45}
-                    style={{ paddingTop: "10px" }}
-                    className="arrow"
-                  />
-                </div>
+                <Link to="/rvk" className="arrowclass" onClick={() => window.scrollTo(0, 0)}>
+                  <div className="arrowclass1">Know More </div>
+                  <div className="arrowclass2">
+                    <BsArrowRight
+                      size={45}
+                      style={{ paddingTop: "7px",color:'white' }}
+                      className="arrow"
+                    />
+                  </div>
+                  </Link>
               </div>
             </div>
           </div>
@@ -75,7 +78,8 @@ function Home() {
         <div className="break"></div>
         <div className="break"></div>
         <Text />
-         <div className="break"></div> <MultiItemCarousel2 />
+        <div className="break"></div>
+        <MultiItemCarousel2 />
         <div className="break"></div>
         <MultiItemCarousel1 />
 

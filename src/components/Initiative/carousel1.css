@@ -13,13 +13,11 @@
   overflow-x: hidden;
   margin-left: -10px;
   padding-left: 0px;
-
 }
 
 .carousel .slick-next {
   right: 0;
   overflow-x: hidden;
-
 }
 .slick-prev::before,
 .slick-next::before {
@@ -37,74 +35,75 @@
   filter: grayscale(0%);
 }
 
-.cont{
+.cont {
   width: 92%;
   display: flex;
   margin: 15px;
+  border: 1px solid #a5a5a5;
   flex-direction: column;
-  border: 1px solid black;
   align-items: center;
   padding-top: 6%;
- justify-content: center;
- text-align: center;
+  padding-bottom: 6%;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px;
 }
-@media ( max-width:1800px){
-  .cont{
+@media (max-width: 1800px) {
+  .cont {
     padding-top: 1.5%;
   }
 }
-.mtext{
-  font-family: 'Open Sans';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 22px;
-display: flex;
-align-items: center;
-letter-spacing: 0.1em;
-margin-top: -10px;
-color: #000000;
+.mtext {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.1em;
+  margin-top: -10px;
+  color: #000000;
 }
-.text{
-  font-family: 'Open Sans';
-font-style: normal;
-font-weight: 300;
-font-size: 12px;
-line-height: 19px;
-display: flex;
-align-items: center;
-letter-spacing: 0.1em;
-text-align: left;
-justify-content: left;
-align-items: left;
-color: #000000;
+.text {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.1em;
+  text-align: left;
+  justify-content: left;
+  align-items: left;
+  color: #000000;
 }
-.head{
+.head {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Open Sans';
-font-style: normal;
-font-weight: 600;
-font-size: 42px;
-line-height: 65px;
-display: flex;
-align-items: center;
-text-align: center;
-letter-spacing: 0.1em;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 65px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1em;
 
-color: #DA9532;
+  color: #da9532;
 }
 @media screen and (max-width: 960px) {
-.head{
-  font-size: 33px;
-
+  .head {
+    font-size: 33px;
+  }
 }
-}
-.bg01{
+.bg01 {
   background-color: white;
 }
-.init{
+.init {
   display: flex;
   width: 100%;
   float: right;
@@ -113,13 +112,12 @@ color: #DA9532;
   padding-right: 15px;
   right: 0;
 }
-.multi__image{
-  width: '100%';
-  height: auto;
-  padding: auto;
-}
-.colorbreak{
+.colorbreak {
   width: 100%;
   height: 20px;
   background-color: white;
+}
+.multi__image0578{
+  height: 200px;
+  width: 95%;
 }

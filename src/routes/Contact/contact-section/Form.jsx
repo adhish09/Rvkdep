@@ -1,26 +1,13 @@
 import React, {useState, useReducer} from 'react'
 import { Icon } from '@iconify/react'
 import sendCircle from '@iconify/icons-mdi/send-circle'
-import axios from 'axios'
+import axios from '../../../services/apiService'
 
 import './form.css'
+import { toast } from 'react-hot-toast'
+import { useForm } from 'react-hook-form'
 
-
-const formReducer = (state, event) => {
-  if (event.reset) {
-    return {
-      email: "",
-      phone: "",
-      name: "",
-      message: "",
-    };
-  }
-  return {
-    ...state,
-    [event.name]: event.value,
-  };
-};
-
+ 
 
 const formInputs = [
   { id: 'name', type: 'text', name:"name",label: 'Your name', placeholder: 'John Doe' },
@@ -44,34 +31,30 @@ const formInputs = [
     name:"message",
     label: 'Your message',
     placeholder: 'How can we help you? Or you us?',
+  
   },
 ]
 
+
 const Form = () => {
-  const [formData, setFormData] = useReducer(formReducer, {});
-
-  const handleChange = (event) => {
-    setFormData({
-      name: event.target.name,
-      value: event.target.value,
-    });
-  };
-
-
+  const { register,handleSubmit,reset,   watch, formState: { errors } } = useForm();
     
-  function handleSubmit(event) {
-    // Submit form data to server
-     axios.post('/api/contact/', formData)
-    .then((response) => {
-      alert("You have successfully contacted")
-    })
-    .catch((error) => {
-     alert(error)
-    });
+ 
+  function onSubmit(data) {
+    
+     axios.post("/api/contact/",data)
+     .then(res=>{
+      toast.success(<h1>successfully contact</h1>)
+     })
+     .catch(err=>{
+      toast.error(err?.message)
+     })
+    reset(); // Reset the form
   }
 
+  
   return (
-  <form className="form">
+  <form className="form" onSubmit={handleSubmit(onSubmit)}>
     <h2 className="form-h2">Send us a message</h2>
 
     {formInputs.map(input => (
@@ -79,23 +62,44 @@ const Form = () => {
         {input.label}
 
         {input.type === 'textarea' ? (
-          <textarea className="form-textarea"  name={input.name}   onChange={handleChange} placeholder={input.placeholder} />
+          <textarea className="form-textarea"  name={input.name}  {...register(input.name, { required: true })} placeholder={input.placeholder} />
         ) : (
           <input
             className="form-input"
             name={input.name}
             type={input.type}
-            onChange={handleChange}
+            {...register(input.name, { required: true })}
             placeholder={input.placeholder}
           />
         )}
       </label>
     ))}
 
-    <Icon className="form-submit" icon={sendCircle} onClick={handleSubmit}/>
+<div> {errors.email && <span> {toast.error(<h1> please fill email field</h1>)} </span>}
+    {errors.name && <span> {toast.error(<h1> please fill name field </h1>)} </span>}
+    {errors.message && <span> {toast.error(<h1> please fill message field</h1>)} </span>}
+    {errors.phone && <span> {toast.error(<h1> please fill phone field</h1>)} </span>}</div>
+    
+<button
+  className="form-submit"
+  style={{ border: 'none', cursor: 'pointer', '&:hover': { width: '154px', color: 'red' } }}
+  type="submit"
+>
+ 
+  <Icon
+    className="form-submits"
+    style={{ border: 'none',}}
+    icon={sendCircle}
+  />
+</button>
 
-    {/* <button className="form-submit" type="submit">
-      Send message
+    {/* <button  className="form-submit" style={{border:"none",cursor:"pointer",    ':hover': {
+      width: "154px",
+      color: "red"
+    }
+}}  type="submit">
+       fdgdsfg
+      <Icon className="form-submit" style={{border:"none",'&:hover':{width:"15px",color:"red"}}}     icon={sendCircle}  />
     </button> */}
   </form>
   )
