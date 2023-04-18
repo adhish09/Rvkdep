@@ -72,22 +72,22 @@ const Footer = (props) => {
           <div className="sb_footer-links_div">
             <h4>Getting involved</h4>
             <br />
-            <a href="/">
+            <a href="career">
               <p>Career</p>
             </a>
-            <a href="/">
+            <a href="eventsall">
               <p>Events</p>
             </a>
-            <a href="/">
-              <p>Glimpse</p>
+            <a href="gallery">
+              <p>Gallery</p>
             </a>
-            <a href="/">
+            <a href="volunteer">
               <p>Volunteer</p>
             </a>
-            <a href="/">
-              <p>Contribute</p>
+            <a href="donation">
+              <p>Donate</p>
             </a>
-            <a href="/">
+            <a href="humanitarian">
               <p>Humantarian</p>
             </a>
             <a href="/">

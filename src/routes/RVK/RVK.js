@@ -1,5 +1,7 @@
 import "./RVK.css";
-
+import L1 from "./L1.png";
+import L2 from "./L2.png";
+import L3 from "./L3.png";
 import React, { useEffect, useState } from "react";
 import { CgMailForward } from "react-icons/cg";
 import axios from "../../services/apiService";
@@ -8,7 +10,7 @@ import { Link } from "react-router-dom";
 const First = () => {
   // window.scrollTo(0,0)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  
+
   const updateScreenWidth = () => {
     setScreenWidth(window.innerWidth);
   };
@@ -30,7 +32,7 @@ const First = () => {
   let [des, setDes] = useState([]);
   useEffect(() => {
     axios.get("/api/rkbaboutdescription/").then((res) => {
-   
+
       setDes(res.data);
     });
   }, []);
@@ -59,7 +61,15 @@ const First = () => {
       });
     }
   };
-
+  const handleClick3 = () => {
+    window.open("https://www.anjan.tv/");
+  };
+  const handleClick1 = () => {
+    window.open("https://www.premrawat.com/");
+  };
+  const handleClick2 = () => {
+    window.open("https://www.rvkproducts.com/");
+  };
   return (
     <div className="maincontmargin456" >
       <div className="card-container_out456">
@@ -133,34 +143,56 @@ const First = () => {
       <div className="break456"></div>
       <div className="quick456">Quick Links</div>
       <section className="main-card--cointainer11456">
-        {links.map((item, i) => (
-          <div className="card-container11456" key={i}>
-            <div className="card11456 ">
-              <div className="card-body11456">
-                <div className="imageD456">
-                  <img src={item.image} alt="img" />
-                </div>
-                <div className="card-title11456" style={{ marginTop: "4px" }}>
-                  {read.id !== item.id && (
-                    <> {item?.description.slice(0, 100)}...</>
-                  )}
-                  {read.id === item.id && <> {item.description}</>}
-                </div>
-                <Link target="_blank" to={`/qlinks/${item.id}`}>
-                <button
-                  className="button456"
-                 
-                >
-                  {" "}
-                  Read More 
-                  <CgMailForward style={{ marginLeft: "7px" }} />
-                </button>
-                </Link>
-              </div>
+      <div className="card-container11456">
+        <div className="card11456 ">
+          <div className="card-body11456">
+            <div className="imageD456">
+              <img src={L1} alt="img" />
             </div>
+            <div className="card-title11456">
+              {" "}
+              Anjan TV is a revolutionary general entertainment channel
+              conceptualized to see inside the heart of Humanity and offer
+              oodles of unlimited entertainment, be it be of mind or soul.{" "}
+            </div>
+            <button className="button456" onClick={handleClick3} >Know More<CgMailForward style={{marginLeft:"7px"}}/></button>
           </div>
-        ))}
-      </section>
+        </div>
+      </div>
+
+      <div className="card-container11456">
+        <div className="card11456 ">
+          <div className="card-body11456">
+            <div className="imageD2456">
+              <img src={L2} alt="img" />
+            </div>
+            <div className="card-title114561">
+              {" "}
+              The official website of Prem Rawat and his work promoting peace,
+              well-being, self-knowledge and understanding.{" "}
+
+            </div>
+            <button className="button456" onClick={handleClick1}>Know More<CgMailForward style={{marginLeft:"7px"}}/></button>
+          </div>
+        </div>
+      </div>
+
+      <div className="card-container11456">
+        <div className="card11456 ">
+          <div className="card-body11456">
+            <div className="imageD2456">
+              <img src={L3} alt="img" />
+            </div>
+            <div className="card-title11456">
+              {" "}
+              RVK Products operates as an e-commerce platform facilitating the acquisition of Inspirational Video DVDs, Bhajan CDs, and other publication items including books, magazines, and journals.{" "}
+
+            </div>
+            <button className="button456" onClick={handleClick2}>Know More<CgMailForward style={{marginLeft:"7px"}}/></button>
+          </div>
+        </div>
+      </div>
+    </section>
       <div className="break456"></div>
     </div>
   );
