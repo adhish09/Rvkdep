@@ -2,6 +2,7 @@ import React from "react";
 import { BsYoutube } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
 import "./main.css";
+import {useTranslation } from 'react-i18next';
 import styled from "styled-components";
 const Button = styled.button`
   padding: 7px 15px;
@@ -17,7 +18,12 @@ const Button = styled.button`
   }
   height: 50px;
 `;
+
+
 const Footer = (props) => {
+
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="footer">
       <div className="sb_footer section_padding">
@@ -32,73 +38,73 @@ const Footer = (props) => {
                 color: "rgb(209,209,209)",
               }}
             >
-              Subscribe Now
+              {t('Sub')}
             </h4>
 
             <div style={{ paddingTop: "1px", fontFamily: "raleway" }}>
-              Subscribe to our newsletter to get more information
+              {t('SubDetail')}
             </div>
             <div className="input footer-inputs">
               <input
-                placeholder="Email"
+                placeholder={t('Email')}
                 type="email"
                 onChange={(e) => props.setEmail(e.target.value)}
                 style={{ paddingLeft: "15px" }}
               />
-              <Button onClick={() => props.handleSubscribe()}>Subscribe</Button>
+              <Button onClick={() => props.handleSubscribe()}>{t('Subscribe')}</Button>
             </div>
           </div>
           <div className="sb_footer-links_div">
-            <h4>Links</h4>
+            <h4>{t('Links')}</h4>
             <br />
             <a
               href="https://www.premrawat.com/"
               target="_blank"
               rel="noreferrer"
             >
-              <p>Prem Rawat</p>
+              <p>{t('Prem Rawat')}</p>
             </a>
             <a
               href="https://www.rvkproducts.com/"
               target="_blank"
               rel="noreferrer"
             >
-              <p>Rvk products</p>
+              <p>{t('Rvk Products')}</p>
             </a>
             <a href="https://www.anjan.tv/" target="_blank" rel="noreferrer">
-              <p>Anjan TV</p>
+              <p>{t('Anjan')}</p>
             </a>
           </div>
           <div className="sb_footer-links_div">
-            <h4>Getting involved</h4>
+            <h4>{t('Involved')}</h4>
             <br />
             <a href="career">
-              <p>Career</p>
+              <p>{t('Career')}</p>
             </a>
             <a href="eventsall">
-              <p>Events</p>
+              <p>{t('Events')}</p>
             </a>
             <a href="gallery">
-              <p>Gallery</p>
+              <p>{t('Gallery')}</p>
             </a>
             <a href="volunteer">
-              <p>Volunteer</p>
+              <p>{t('Volunteer')}</p>
             </a>
             <a href="donation">
-              <p>Donate</p>
+              <p>{t('Donation')}</p>
             </a>
             <a href="humanitarian">
-              <p>Humantarian</p>
+              <p>{t('Humanitarian')}</p>
             </a>
             <a href="/">
-              <p>Policies</p>
+              <p>{t('Policies')}</p>
             </a>
           </div>
           <div className="sb_footer-links_div">
-            <h4>Address:</h4>
+            <h4>{t('Address')}</h4>
             <br />
             <a href="/">
-              <p>Chattarpur, Chandanhula, New Delhi - 110074</p>
+              <p>{t('MainAdd')}</p>
             </a>
             <a href="/">
               <p>+91 011-35009190</p>
