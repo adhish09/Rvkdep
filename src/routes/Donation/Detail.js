@@ -11,11 +11,15 @@ import { useForm } from "react-hook-form";
 import axios from "../../services/apiService";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-hot-toast";
+import { useLocation } from 'react-router-dom';
+
 
  
 const Detail = (props) => {
    
   const {donate}=useContext(AuthContext)
+  const location = useLocation();
+
  
   const navigate = useNavigate();
   
@@ -109,9 +113,13 @@ const Detail = (props) => {
     }
     setIsChecked2(event.target.checked);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on navigation
+  }, [location.pathname]);
    
   return (
-    <div className="newss313" style={{paddingTop:"100px"}}>
+    <div className="newss313" style={{paddingTop:"15px"}}>
       <div className="backcont">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="donationhead01">

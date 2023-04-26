@@ -128,14 +128,14 @@ const MultiItemCarousel2 = () => {
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
-  if (width <= 426) {
+  if (width <= 390) {
     slidesToShow = 1;
-  } else if (width > 426 && width <= 769) {
+  } else if (width > 390 && width <= 769) {
     slidesToShow = 3;
   } else if (width > 769 && width <= 1025) {
     slidesToShow = 4;
   } else {
-    slidesToShow = 4;
+    slidesToShow = 5;
   }
 
   return (
@@ -154,7 +154,7 @@ const MultiItemCarousel2 = () => {
 
 const Card = ({ item }) => {
   return (
-    <div style={{ width: "100%", textAlign: "center", padding: "0px", margin: "0 auto" }}>
+    <div style={{ width: "100%", textAlign: "center", padding: "0px", margin: "0 auto", border: "1px solid #a5a5a5", borderRadius: "12px" }}>
       <NavLink to={`/event/${item.id}/details`}>
         <div className="eve"  >
           <img

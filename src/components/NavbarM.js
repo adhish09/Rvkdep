@@ -12,12 +12,16 @@ import { BsArrowRight } from "react-icons/bs";
 import MultiItemCarousel from "./LatestVideo/MultiItemCrousel";
 import MultiItemCarousel1 from "./Initiative/MultiItemCrousel";
 import MultiItemCarousel2 from "./Events/MultiItemCrousel";
+import {useTranslation } from 'react-i18next';
+
 import Text from "./Text/Text";
 function NavbarM() {
 
   const [click, setClick] = useState(false);
   const isMobile = window.innerWidth < 900;
   const handleClick = () => setClick(!click);
+  const { t, i18n } = useTranslation();
+
   const closeMobileMenu = () => setClick(false);
 
   return (
@@ -27,7 +31,7 @@ function NavbarM() {
           <div className="navbar-container container">
             <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
               <img src={Logo} alt="img" className="navbar-icon" />
-              Raj Vidya Kender
+            {t('RVK')}
             </Link>
 
             <div className="menu-icon" onClick={handleClick}>

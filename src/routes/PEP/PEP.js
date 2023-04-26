@@ -7,7 +7,10 @@ import PEP1 from "./PEP1";
 import PEP2 from "./PEP2";
 import PEP3 from "./PEP3";
 import Pep from "./Index";
+import { useEffect } from "react";
 import { Layout } from "antd";
+import { useLocation } from 'react-router-dom';
+
 import React from "react";
 const pepmain={
   background:'transparent'
@@ -34,6 +37,14 @@ const textStyle={
   lineHeight:"25px"
 }
 const First = () => {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on navigation
+  }, [location.pathname]);
+ 
+
    
   return (
       <div className="pep_top_container">

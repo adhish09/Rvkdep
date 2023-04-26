@@ -160,9 +160,11 @@ function Profile() {
                     </div>
                   </div>
                 </section>
-                <button className="bookevent" onClick={logout}>
+                <button className="bookevent" onClick={()=>navigate("/eventsall")}>Book Event</button>
+
+                {/* <button className="bookevent" onClick={logout}>
                   Logout
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -171,7 +173,9 @@ function Profile() {
         <div className="card-container91158_2">
           <div className="card91158 ">
             <div className="img91158">
-              <div className="donationprofile">Donation History</div>
+              <div className="donationprofile">Donation History<button className="bookevent1" onClick={logout}>
+                  Logout
+                </button></div>
               <div className="donation_detail">
                 <div className="donhistory1">
                   <div className="donationdetailheadingmain">
@@ -267,7 +271,8 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <button className="bookevent" onClick={()=>navigate("/eventsall")}>Book Event</button>
+              
+              {/* <button className="bookevent" onClick={()=>navigate("/eventsall")}>Book Event</button> */}
             </div>
           </div>
         </div>

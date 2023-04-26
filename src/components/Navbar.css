@@ -139,7 +139,6 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
-
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
@@ -147,10 +146,15 @@
   line-height: 22px;
   display: flex;
   align-items: center;
+  transition: transform 300ms ease-in-out;
+
   text-align: center;
 }
+
 .nav-links:hover {
   color: #da9532;
+  transform: scale(1.1);
+
 }
 
 .activated {
@@ -909,7 +913,7 @@ text-align: center;}
 .dropdown-menu0101 {
   display: none;
   border-radius: 10px;
-  margin-left: 0px;
+  margin-left: -10px;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 100px;
@@ -937,17 +941,22 @@ text-align: center;}
 .menu-button0101 {
   background-color: transparent;
   cursor: pointer;
-padding-top: 10px;
+  padding-top: 10px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
+  transition: transform 300ms ease-in-out;
+  margin-left: -5px;
   font-size: 14px;
   line-height: 22px;
   display: flex;
   align-items: center;
   text-align: center;
-  color: #858585;
+  color: #1b1919;
 
+}
+.menu-button0101:hover{
+  transform: scale(1.1);
 }
 .translanguagebutton{
   background-color: transparent;

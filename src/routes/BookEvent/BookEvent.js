@@ -7,6 +7,7 @@ import {  useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "../../services/apiService";
 import "./BookEvent.css";
+import { useLocation } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 // import Razorpay from 'razorpay';
 
@@ -29,11 +30,15 @@ function formatDjangoDateTime(djangoDatetimeObj) {
    
 const BookEvent = () => {
   const [isDivOpen, setIsDivOpen] = useState(false);
+  const location = useLocation();
   const [event, setEvent] = useState({});
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const handleButtonClick = () => {
     setIsDivOpen(!isDivOpen);
+  };
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 2000, behavior: 'smooth' }); // Scroll to top with smooth animation
   };
   const {
     register,
@@ -122,6 +127,10 @@ const BookEvent = () => {
       }
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on navigation
+  }, [location.pathname]);
  
   useEffect(() => {
     axios.get(`/api/events/${id}`).then((res) => {
@@ -212,7 +221,7 @@ const BookEvent = () => {
                     </div>
                   </div>
                 </div>
-                <button className="bookeventticket" onClick={handleButtonClick}>
+                <button className="bookeventticket" onClick={() => {handleScrollToTop(); handleButtonClick();}}>
                   Book Now
                 </button>
               </div>

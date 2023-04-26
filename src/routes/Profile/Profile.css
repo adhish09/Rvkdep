@@ -146,7 +146,8 @@ margin-bottom: 15px;
     font-size: 18px;
     font-family: "Open Sans";
 padding: 3px 35px;
-margin-top: 20px;
+margin-top: 25px;
+margin-bottom:20px ;
 border: none;
 color: white;
 border-radius: 50px;
@@ -157,6 +158,28 @@ float: right;
 .bookevent:hover{
   background-color: orange;
 }
+
+.bookevent1{
+  background-color: #DA9532;
+  font-size: 18px;
+  font-family: "Open Sans";
+padding: 3px 35px;
+margin-top: 9px;
+border: none;
+color: white;
+border-radius: 50px;
+height: 35px;
+cursor: pointer;
+float: right;
+}
+.bookevent1:hover{
+background-color: orange;
+}
+@media (max-width: 700px) {
+  .bookevent1{
+justify-content: center;
+float: none;
+  }}
 @media (max-width: 700px) {
   .bookevent{
 justify-content: center;

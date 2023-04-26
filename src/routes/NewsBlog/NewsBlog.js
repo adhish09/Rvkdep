@@ -32,13 +32,12 @@ export default function NewsBlog() {
         </h1>
         <div className="singlePostInfo">
           <span>Author: {news?.author}</span>
-          <span>1 day ago</span>
         </div>
         <p className="singlePostDesc">{news?.details}</p>
         <div style={{ textAlign: "center" }}>
           <b className="singlePostAuthor">
-            <a href={news?.news_document} target="_blank" rel="noreferrer">
-              Download Pdf
+            <a href={news?.news_document} target="_blank" rel="noreferrer" >
+             <button className="newsblogcont"> Download PDF</button>
             </a>
           </b>
         </div>

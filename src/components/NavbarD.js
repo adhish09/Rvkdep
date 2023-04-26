@@ -48,7 +48,7 @@ const Button = styled.button`
 
 function NavbarD() {
   const [click, setClick] = useState(false);
-  const isMobile = window.innerWidth < 1100;
+  const isMobile = window.innerWidth < 900;
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const { t, i18n } = useTranslation();
@@ -103,7 +103,7 @@ function NavbarD() {
                   <a href="#"><button className="translanguagebutton" onClick={changeLanguage("hi")}>हिंदी</button></a>
               </div>
             </div>
-
+            
                             <div>
                   {!user ? (
                     <button className="button587" onClick={toggleModal}>
@@ -250,7 +250,7 @@ function NavbarD() {
                           {" "}
                           <a href="#">{t('Contact')}</a>
                         </NavLink>
-
+                       
                       </div>
                     </div>
                   </NavLink>

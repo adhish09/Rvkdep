@@ -121,8 +121,7 @@ const Humanitarian = () => {
                 The initiative offers food, medical supplies, and financial
                 assistance to individuals and families affected by
                 the pandemic. The program also aims to raise awareness of
-                COVID-19 safety protocols and provides educational resources to
-                prevent the spread of the virus. RVK is dedicated to supporting
+                COVID-19 safety protocols and provides educational resources. RVK is dedicated to supporting
                 those in need during these challenging times, and its efforts
                 offer hope for a brighter future. With the COVID Relief camp, many people got their basic things.
               </div>

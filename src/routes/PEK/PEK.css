@@ -55,13 +55,12 @@ margin-bottom: 0px;
       margin-right: -65px;
       margin-top: -30px;
       margin-bottom: -85px;
-    }}
+   }}
   .card_out345 {
     height: 400px;
     background-color: #fff;
     position: relative;
     box-shadow: 0 0 5px rgba(75, 75, 75, 0.07);
-
     background: url(cloud1.jpg), linear-gradient(95.09deg, rgba(226, 148, 36, 0.83) 0%, rgba(106, 241, 209, 0.61) 100%);  }
   .card-body345{
     display: flex;
@@ -106,11 +105,11 @@ color: white;
       margin-top:-10px ;
     }
     .card_out345{
-      height: 600px;
+      height: 450px;
       align-items: center;
     }
     .card-title_out345{
-margin-top: -40px;
+margin-top: -25%;
     }
   }
 .image345 img{
@@ -169,7 +168,7 @@ margin-left: -120px;
     line-height: 35px;
     display: flex;
     align-items: center;
-    
+
     letter-spacing: 0.1em;
   }
 
@@ -183,7 +182,7 @@ margin-left: -120px;
     word-spacing: 0.8px;
     display: flex;
     align-items: center;
-    
+
     letter-spacing: 0.1em;
     color: #4a4a4a;
   }
@@ -344,7 +343,7 @@ font-size: 20px;
     word-spacing: 0.8px;
     display: flex;
     align-items: center;
-    
+
     letter-spacing: 0.1rem;
 
   }
@@ -396,7 +395,7 @@ padding-bottom: 20px;
     font-weight: 400;
     font-size: 16px;
     line-height: 40px;
-    
+
     letter-spacing: 0.1em;
   }
   .last345 span{

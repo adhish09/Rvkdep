@@ -22,6 +22,13 @@ header {
     z-index: 1000;
 }
 
+.button5878{
+    border: 2px solid black;
+    margin-left: 5px;
+    border-radius: 10px;
+    background-color: #DA9532;
+}
+
 header .logo486 {
     font-weight: bolder;
     font-size: 22px;
@@ -111,7 +118,7 @@ header label {
 
 
 .logo486:hover{
-    color: #da9532 !important; 
+    color: #da9532 !important;
 }
 
 
@@ -138,6 +145,7 @@ header label {
         background: #fff;
         border-top: 1px solid rgba(0, 0, 0, .1);
         display: none;
+        border-bottom: 1px solid #a5a5a5;
     }
 
     header .navbar486 ul li {
@@ -182,3 +190,13 @@ header label {
        right: 5px;
     }
 }
+.translanguagebutton1{
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 16px;
+  }
+
+  .navbar-open {
+    touch-action: none;
+  }
